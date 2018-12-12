@@ -225,6 +225,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1315692849009470, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400046924752420, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: projectileObj
+      value: 
+      objectReference: {fileID: 1586104659038430, guid: d6001369187543e44b96937993247a4c,
+        type: 2}
+    - target: {fileID: 114400046924752420, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: timeBtwnShots
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
   m_IsPrefabParent: 0
