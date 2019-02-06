@@ -26,4 +26,19 @@ public class TempProjectile : MonoBehaviour {
 	void DestroyProjectile(){
 		Destroy (gameObject);
 	}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+        GameObject collGO = collision.gameObject;
+        switch (collGO.tag)
+        {
+            case "Orc":
+                collGO.GetComponent<OrcBoi>().TakeDamage(damageAmount);
+                break;
+            case "Orc King":
+                collGO.GetComponent<OrcKing>().TakeDamage(damageAmount, this.gameObject);
+                break;
+        }
+    }
 }
