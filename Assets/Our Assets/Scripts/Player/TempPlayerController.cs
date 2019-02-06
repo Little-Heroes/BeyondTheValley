@@ -7,6 +7,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class TempPlayerController : MonoBehaviour {
 
+    [Header("Health Variables")]
+    public float health;
+
 	[Header("Movement Variables")]
 	public float speed;
 	private Animator anim;
@@ -104,4 +107,13 @@ public class TempPlayerController : MonoBehaviour {
 		// Move the Player
 		rb2D.MovePosition(rb2D.position + moveVelocity * Time.fixedDeltaTime);
 	}
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            //game over stuff
+        }
+    }
 }
