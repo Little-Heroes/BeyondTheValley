@@ -30,8 +30,8 @@ public class OrcKingProjectile : OrcKing {
                 projectileColour = Colours.Red;
                 gameObject.GetComponentInChildren<Renderer>().material.color = Color.red;
                 break;
-            case Colours.Yellow:
-                projectileColour = Colours.Yellow;
+            case Colours.Black:
+                projectileColour = Colours.Black;
                 gameObject.GetComponentInChildren<Renderer>().material.color = new Color(0, 0, 0);
                 break;
         }

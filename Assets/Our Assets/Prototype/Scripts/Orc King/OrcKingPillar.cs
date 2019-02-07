@@ -22,11 +22,15 @@ public class OrcKingPillar : OrcKing {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "PlayerProjectile")
+        if (collision.gameObject.tag == "PlayerProjectile")
         {
             GameObject go = collision.gameObject;
             OrcKingProjectile proj = go.AddComponent<OrcKingProjectile>();
             proj.ChangeColour(myColour);
+        }
+        else if (collision.gameObject.tag == "OrcKingProjectile")
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

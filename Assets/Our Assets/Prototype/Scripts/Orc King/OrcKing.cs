@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrcKing : MonoBehaviour
 {
-
-    [SerializeField]
+    public float startingHealth;
     private float health;
+    public Text healthText;
+    private int currentPhase = 1;
+    private GameObject player;
 
     [Header("Orc Spawning")]
     public GameObject orc;
@@ -17,12 +20,14 @@ public class OrcKing : MonoBehaviour
     [SerializeField]
     private float orcSpawnCooldown;
     float orcSpawnTimer;
+    [Tooltip("How much you want the spawn time to decrease by")]
+    public float orcSpawnCDDecrease;
 
     public enum Colours
     {
         Blue,
         Red,
-        Yellow,
+        Black,
         NumberOfColours
     }
     [Header("Color/Shape Changing")]
@@ -31,6 +36,9 @@ public class OrcKing : MonoBehaviour
     float changeColourTimer;
     public GameObject PillarParent;
     public float rotationSpeed;
+    public bool isRotating;
+    public float rotationSpeedIncrease;
+    public float colourChangeCDDecrease;
 
     [Header("Smashy boi")]
     public float smashCooldown;
@@ -42,6 +50,9 @@ public class OrcKing : MonoBehaviour
     public float smashy2TimeDelay;
     float smashy2Timer;
     bool canStartNewSmash = true;
+    public float smashCooldownDecreaseAmount;
+    public float projectileSpeed;
+    public float projectileSpeedIncrease;
 
 
     // Use this for initialization
@@ -50,12 +61,46 @@ public class OrcKing : MonoBehaviour
         ChangeColour();
         smashTimer = smashCooldown;
         smashy2Timer = smashy2TimeDelay;
+        health = startingHealth;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        PillarParent.transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
+        #region BossPhases
+        if (health < startingHealth * 0.75f && currentPhase == 1)
+        {
+            Debug.Log("Moved a phase");
+            isRotating = true;
+            currentPhase++;
+        }
+        else if (health < startingHealth * 0.5f && currentPhase == 2)
+        {
+            Debug.Log("Moved a phase");
+            rotationSpeed += rotationSpeedIncrease;
+            rotationSpeed *= -1;
+            smashCooldown -= smashCooldownDecreaseAmount;
+            currentPhase++;
+            changeColourCooldown -= colourChangeCDDecrease;
+        }
+        else if (health < startingHealth * 0.25f && currentPhase == 3)
+        {
+            Debug.Log("Moved a phase");
+            rotationSpeed *= -1;
+            rotationSpeed += rotationSpeedIncrease;
+            projectileSpeed += projectileSpeedIncrease;
+            orcSpawnCooldown -= orcSpawnCDDecrease;
+            currentPhase++;
+            changeColourCooldown -= colourChangeCDDecrease;
+        }
+        #endregion
+
+
+        if (isRotating)
+            PillarParent.transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
+
+        healthText.text = health.ToString();
 
         if (orcSpawnTimer > 0)
         {
@@ -70,7 +115,18 @@ public class OrcKing : MonoBehaviour
             if (rng < chanceOfSpawningOrc)
             {
                 //spawn an orc in one of the orc spawn points
-                int randomSpawn = Random.Range(0, orcSpawns.Length);
+                bool wantToSpawn = false;
+                int randomSpawn = 0;
+                while (!wantToSpawn)
+                {
+                    randomSpawn = Random.Range(0, orcSpawns.Length);
+                    if (Vector2.Distance(orcSpawns[randomSpawn].transform.position, player.transform.position) <= 25.0f)
+                    {
+                        continue;
+                    }
+                    else
+                        wantToSpawn = true;
+                }
                 Instantiate(orc, orcSpawns[randomSpawn].transform.position, Quaternion.identity);
             }
             //reset orc spawn timer
@@ -112,8 +168,10 @@ public class OrcKing : MonoBehaviour
                     GameObject go = Instantiate(projectile, pos, Quaternion.identity);
                     go.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * -angle, Vector3.forward);
                     TempProjectile tp = go.GetComponent<TempProjectile>();
+                    go.layer = LayerMask.NameToLayer("OrcKingProjectile");
+                    go.tag = "OrcKingProjectile";
                     tp.damageAmount = 1;
-                    tp.speed = 15;
+                    tp.speed = projectileSpeed;
                     canStartNewSmash = false;
                 }
 
@@ -133,8 +191,10 @@ public class OrcKing : MonoBehaviour
                     GameObject go = Instantiate(projectile, pos, Quaternion.identity);
                     go.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * -angle, Vector3.forward);
                     TempProjectile tp = go.GetComponent<TempProjectile>();
+                    go.layer = LayerMask.NameToLayer("OrcKingProjectile");
+                    go.tag = "OrcKingProjectile";
                     tp.damageAmount = 1;
-                    tp.speed = 15;
+                    tp.speed = projectileSpeed;
                     smashTimer = smashCooldown;
                     canStartNewSmash = true;
                     smashy2Timer = smashy2TimeDelay;
@@ -172,8 +232,8 @@ public class OrcKing : MonoBehaviour
             case Colours.Red:
                 gameObject.GetComponent<Renderer>().material.color = Color.red;
                 break;
-            case Colours.Yellow:
-                gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+            case Colours.Black:
+                gameObject.GetComponent<Renderer>().material.color = Color.black;
                 break;
         }
     }

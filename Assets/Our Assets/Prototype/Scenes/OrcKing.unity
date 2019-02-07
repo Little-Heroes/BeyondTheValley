@@ -161,6 +161,21 @@ Prefab:
       propertyPath: health
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114400046924752420, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: timeBetweenBlinks
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400046924752420, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: invincibleTimeAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114400046924752420, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: healthUI
+      value: 
+      objectReference: {fileID: 827291041}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
   m_IsPrefabAsset: 0
@@ -208,21 +223,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24671369458c2f84ba6cd0e728679ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  startingHealth: 0
+  healthText: {fileID: 0}
   orc: {fileID: 0}
   orcSpawns: []
   chanceOfSpawningOrc: 0
   orcSpawnCooldown: 0
+  orcSpawnCDDecrease: 0
   currentColours: 0
   changeColourCooldown: 0
   PillarParent: {fileID: 0}
   rotationSpeed: 0
+  isRotating: 0
+  rotationSpeedIncrease: 0
+  colourChangeCDDecrease: 0
   smashCooldown: 0
   projectile: {fileID: 0}
   smashWarningTimer: {fileID: 0}
   circleRadius: 0
   numberOfProjectiles: 0
   smashy2TimeDelay: 0
+  smashCooldownDecreaseAmount: 0
+  projectileSpeed: 0
+  projectileSpeedIncrease: 0
   myColour: 0
 --- !u!212 &227369074
 SpriteRenderer:
@@ -283,6 +306,163 @@ Transform:
   m_Father: {fileID: 1448054032}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &317065684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317065687}
+  - component: {fileID: 317065686}
+  - component: {fileID: 317065685}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &317065685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317065684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &317065686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317065684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &317065687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317065684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &374811210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 374811214}
+  - component: {fileID: 374811213}
+  - component: {fileID: 374811212}
+  - component: {fileID: 374811211}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &374811211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374811210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &374811212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374811210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1600, y: 900}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &374811213
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374811210}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &374811214
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 374811210}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1798835754}
+  - {fileID: 827291040}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &518827200
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,21 +507,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24671369458c2f84ba6cd0e728679ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  startingHealth: 0
+  healthText: {fileID: 0}
   orc: {fileID: 0}
   orcSpawns: []
   chanceOfSpawningOrc: 0
   orcSpawnCooldown: 0
+  orcSpawnCDDecrease: 0
   currentColours: 0
   changeColourCooldown: 0
   PillarParent: {fileID: 0}
   rotationSpeed: 0
+  isRotating: 0
+  rotationSpeedIncrease: 0
+  colourChangeCDDecrease: 0
   smashCooldown: 0
   projectile: {fileID: 0}
   smashWarningTimer: {fileID: 0}
   circleRadius: 0
   numberOfProjectiles: 0
   smashy2TimeDelay: 0
+  smashCooldownDecreaseAmount: 0
+  projectileSpeed: 0
+  projectileSpeedIncrease: 0
   myColour: 2
 --- !u!212 &518827203
 SpriteRenderer:
@@ -402,6 +590,81 @@ Transform:
   m_Father: {fileID: 1448054032}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &827291039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 827291040}
+  - component: {fileID: 827291042}
+  - component: {fileID: 827291041}
+  m_Layer: 5
+  m_Name: Player Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &827291040
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 827291039}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000083, y: 1.0000083, z: 1.0000083}
+  m_Children: []
+  m_Father: {fileID: 374811214}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -717, y: 415}
+  m_SizeDelta: {x: 1609.2, y: 75.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &827291041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 827291039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 41
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 41
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 4
+--- !u!222 &827291042
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 827291039}
+  m_CullTransparentMesh: 0
 --- !u!1 &1145336656
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,21 +709,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24671369458c2f84ba6cd0e728679ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  startingHealth: 0
+  healthText: {fileID: 0}
   orc: {fileID: 0}
   orcSpawns: []
   chanceOfSpawningOrc: 0
   orcSpawnCooldown: 0
+  orcSpawnCDDecrease: 0
   currentColours: 0
   changeColourCooldown: 0
   PillarParent: {fileID: 0}
   rotationSpeed: 0
+  isRotating: 0
+  rotationSpeedIncrease: 0
+  colourChangeCDDecrease: 0
   smashCooldown: 0
   projectile: {fileID: 0}
   smashWarningTimer: {fileID: 0}
   circleRadius: 0
   numberOfProjectiles: 0
   smashy2TimeDelay: 0
+  smashCooldownDecreaseAmount: 0
+  projectileSpeed: 0
+  projectileSpeedIncrease: 0
   myColour: 1
 --- !u!212 &1145336659
 SpriteRenderer:
@@ -631,7 +902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b7c0ba319d8d44a601f1a5c7893e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  startingHealth: 100
+  healthText: {fileID: 1798835755}
   orc: {fileID: 1853021598405304, guid: 200b3d75732623248a944c64f10abf3c, type: 2}
   orcSpawns:
   - {fileID: 1319412226}
@@ -640,16 +912,23 @@ MonoBehaviour:
   - {fileID: 1834955957}
   chanceOfSpawningOrc: 50
   orcSpawnCooldown: 5
+  orcSpawnCDDecrease: 1.5
   currentColours: 0
   changeColourCooldown: 10
   PillarParent: {fileID: 1448054031}
-  rotationSpeed: 10
-  smashCooldown: 2.5
+  rotationSpeed: 15
+  isRotating: 0
+  rotationSpeedIncrease: 10
+  colourChangeCDDecrease: 3
+  smashCooldown: 5
   projectile: {fileID: 1586104659038430, guid: d6001369187543e44b96937993247a4c, type: 2}
   smashWarningTimer: {fileID: 0}
   circleRadius: 7.5
   numberOfProjectiles: 10
   smashy2TimeDelay: 1
+  smashCooldownDecreaseAmount: 0.25
+  projectileSpeed: 15
+  projectileSpeedIncrease: 5
 --- !u!58 &1325599827
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -916,6 +1195,81 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1798835753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1798835754}
+  - component: {fileID: 1798835756}
+  - component: {fileID: 1798835755}
+  m_Layer: 5
+  m_Name: Boss Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1798835754
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798835753}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 374811214}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4.6, y: 63}
+  m_SizeDelta: {x: 1609.2, y: 75.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1798835755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798835753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 41
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 41
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 250
+--- !u!222 &1798835756
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1798835753}
+  m_CullTransparentMesh: 0
 --- !u!1 &1834955956
 GameObject:
   m_ObjectHideFlags: 0

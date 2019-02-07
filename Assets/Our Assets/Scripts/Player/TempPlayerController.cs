@@ -3,12 +3,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class TempPlayerController : MonoBehaviour {
 
     [Header("Health Variables")]
     public float health;
+    public bool isInvincible = false;
+    public float invincibleTimeAmount;
+    float invincibleTimer;
+    public Text healthUI;
+
+    [Header("Blink Variables")]
+    public float timeBetweenBlinks;
+    float blinkTimer = 0.0f;
 
 	[Header("Movement Variables")]
 	public float speed;
@@ -24,9 +33,13 @@ public class TempPlayerController : MonoBehaviour {
 	void Start(){
 		rb2D = GetComponent<Rigidbody2D> ();
 		anim = GetComponent<Animator> ();
-	}
+        invincibleTimer = invincibleTimeAmount;
+
+    }
 
 	void Update(){
+        healthUI.text = health.ToString();
+
 		#region Getting Player Input
 		// Get Player Input
 		Vector2 moveInput = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
@@ -101,6 +114,22 @@ public class TempPlayerController : MonoBehaviour {
 		#endregion
 
 		#endregion
+
+        if(isInvincible)
+        {
+            Blink();
+            invincibleTimer -= Time.deltaTime;
+            if(invincibleTimer <= 0)
+            {
+                isInvincible = false;
+                invincibleTimer = invincibleTimeAmount;
+                Renderer[] things = gameObject.GetComponentsInChildren<Renderer>();
+                foreach (Renderer r in things)
+                {
+                    r.enabled = true;
+                }
+            }
+        }
 	}
 
 	void FixedUpdate(){
@@ -110,10 +139,27 @@ public class TempPlayerController : MonoBehaviour {
 
     public void TakeDamage(float damage)
     {
+        if (isInvincible)
+            return;
         health -= damage;
+        isInvincible = true;
         if(health <= 0)
         {
             //game over stuff
+        }
+    }
+
+    public void Blink()
+    {
+        blinkTimer -= Time.deltaTime;
+        if(blinkTimer <= 0)
+        {
+            Renderer[] things = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in things)
+            {
+                r.enabled = !r.enabled;
+                blinkTimer = timeBetweenBlinks;
+            }
         }
     }
 }
