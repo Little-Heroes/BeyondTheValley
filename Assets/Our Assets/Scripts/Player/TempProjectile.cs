@@ -39,6 +39,9 @@ public class TempProjectile : MonoBehaviour {
             case "Orc King":
                 collGO.GetComponent<OrcKing>().TakeDamage(damageAmount, this.gameObject);
                 break;
+            case "Player":
+                collGO.GetComponent<TempPlayerController>().TakeDamage(damageAmount);
+                break;
         }
     }
 }

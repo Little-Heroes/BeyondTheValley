@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Orc
   - Orc King
+  - PlayerProjectile
+  - OrcKingProjectile
   layers:
   - Default
   - TransparentFX
