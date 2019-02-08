@@ -116,8 +116,9 @@ public class Player : MonoBehaviour {
     public List<Item> startingItems;
 
     public ActiveItem heldItem;
-
-    List<Item> items = new List<Item>();
+    
+    [HideInInspector]
+    public List<Item> items = new List<Item>();
 
     int numItems = 0;
 
@@ -156,13 +157,8 @@ public class Player : MonoBehaviour {
         chargedProjectile = baseChargedProjectile;
         #endregion applying stats
 
-        for (int num = 0; num < 10000; num++) { items.Add(new Item()); }
-
-        int i = 0;
-        foreach (Item item in startingItems) { items[i] = item; i++; }
+        foreach (Item item in startingItems) { items.Add(item); }
 
     }
 
-
-    private void OnTriggerEnter2D(Collider2D c) { if (c.GetComponent<Item>() != null) { items[numItems] = c.GetComponent<Item>(); numItems++; } }
 }

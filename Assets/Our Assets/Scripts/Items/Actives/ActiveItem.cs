@@ -8,12 +8,22 @@ public class ActiveItem : Item {
 
     bool hasDropped = false;
 
-    public override void OnPickUp(ref Player player) {
-        if(!hasDropped) base.OnPickUp(ref player);
-        //add it to the player, 
+    public override void OnPickUp(Player player) {
+        hasPickedUp = true;
+        player.MaxHealth += healthChange;
+        if (healPlayerToFull) player.Health = player.MaxHealth;
+        else if (healPlayer) player.Health += healthChange;
+        player.MoveSpeed += speedChange;
+        player.FastestSecondsPerShot += maxShotDelayChange;
+        player.SecondsPerShot += shotDelayChange;
+        player.ProjectileSpeed += projectileSpeedChange;
+        player.ProjectileRange += projectileRangeChange;
+        player.MaxCharges += maxChargeShotsChange;
+        player.Charges += numChargeShotsChange;
+        //player.SwapActive(this)
     }
 
-    public void OnDrop(ref Player player) {
+    public void OnDrop(Player player) {
         if (permanentStatUps || hasDropped) { return; }
         player.MaxHealth -= healthChange;
         player.MoveSpeed -= speedChange;

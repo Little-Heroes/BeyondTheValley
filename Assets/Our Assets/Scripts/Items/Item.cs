@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item : ScriptableObject {
 
     //the stats a player has can be upgraded
 
@@ -39,7 +39,7 @@ public class Item : MonoBehaviour {
 
     protected bool hasPickedUp = false;
 
-    public virtual void OnPickUp(ref Player player) {
+    public virtual void OnPickUp(Player player) {
         hasPickedUp = true;
         player.MaxHealth += healthChange;
         if (healPlayerToFull) player.Health = player.MaxHealth;
@@ -51,5 +51,7 @@ public class Item : MonoBehaviour {
         player.ProjectileRange += projectileRangeChange;
         player.MaxCharges += maxChargeShotsChange;
         player.Charges += numChargeShotsChange;
+        player.items.Add(this);
+        //else player.SwapActive(this);
     }
 }
