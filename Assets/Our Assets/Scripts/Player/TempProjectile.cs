@@ -42,6 +42,15 @@ public class TempProjectile : MonoBehaviour {
             case "Player":
                 collGO.GetComponent<TempPlayerController>().TakeDamage(damageAmount);
                 break;
+            case "Ranged":
+                collGO.GetComponent<Ranged>().TakeDamage(damageAmount);
+                break;
+            case "Charge":
+                collGO.GetComponent<Charge>().TakeDamage(damageAmount);
+                break;
+            case "FreeRoam":
+                collGO.GetComponent<FreeRoam>().TakeDamage(damageAmount);
+                break;
         }
     }
 }

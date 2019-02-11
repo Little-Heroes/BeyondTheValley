@@ -36,7 +36,7 @@ public class OrcBoi : MonoBehaviour
     {
         //rb2D.position = Vector3.Lerp(rb2D.position, target.position, movementSpeed * Time.time);
         if (following)
-            rb2D.position = Vector3.MoveTowards(rb2D.position, target.position, movementSpeed * Time.deltaTime);
+            rb2D.position = Vector3.MoveTowards(rb2D.position, target.position, movementSpeed);
     }
 
     public void TakeDamage(float damage)
