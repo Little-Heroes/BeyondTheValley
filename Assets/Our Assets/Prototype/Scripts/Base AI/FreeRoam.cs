@@ -62,7 +62,6 @@ public class FreeRoam : MonoBehaviour
                 else
                 {
                     Vector3 randomVector = Random.insideUnitCircle.normalized;
-                    Debug.Log(randomVector.magnitude);
                     targetPosition = transform.position + randomVector * moveDistance;
                     isCharging = true;
                 }

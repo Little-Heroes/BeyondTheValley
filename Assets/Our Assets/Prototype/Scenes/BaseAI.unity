@@ -360,6 +360,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 114233869943924716, guid: be1fb72996881ee4f9233833cbe6d27f,
+        type: 2}
+      propertyPath: rangedAttackCooldown
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be1fb72996881ee4f9233833cbe6d27f, type: 2}
   m_IsPrefabAsset: 0
