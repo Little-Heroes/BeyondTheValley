@@ -444,9 +444,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c0ea58fef30490498200fe8e1db4747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 3
   chargeCooldown: 1
-  timeBetweenMovements: 0.25
+  timeBetweenMovements: 0.2
   chargeDamageAmount: 1
   chargeDistance: 5
   chargeSpeed: 0.25
