@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de2ae319dfb0de43a0d7266f21fda96, type: 3}
+  m_Name: TestActive
+  m_EditorClassIdentifier: 
+  healthChange: 0
+  healPlayer: 0
+  healPlayerToFull: 0
+  speedChange: 0
+  shotDelayChange: 0
+  maxShotDelayChange: 0
+  projectileSpeedChange: 0
+  projectileRangeChange: 0
+  numChargeShotsChange: 0
+  maxChargeShotsChange: 0
+  permanentStatUps: 0

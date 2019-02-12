@@ -9,6 +9,6 @@ public class InWorldItem : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D c) {
         Player player = c.GetComponent<Player>();
-        if (player != null) { thisItem.OnPickUp(player); }
+        if (player != null) { thisItem.OnPickUp(player); Destroy(gameObject, 0.1f); }
     }
 }

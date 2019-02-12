@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Active Item", menuName = "Active Item")]
 public class ActiveItem : Item {
 
     public bool permanentStatUps;
