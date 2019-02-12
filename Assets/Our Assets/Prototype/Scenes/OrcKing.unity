@@ -904,7 +904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   healthText: {fileID: 1798835755}
-  orc: {fileID: 1853021598405304, guid: 200b3d75732623248a944c64f10abf3c, type: 2}
+  orc: {fileID: 1894380693957928, guid: 3f9654fd77790354098d1081837e5b7b, type: 2}
   orcSpawns:
   - {fileID: 1319412226}
   - {fileID: 1427043497}
@@ -916,8 +916,8 @@ MonoBehaviour:
   currentColours: 0
   changeColourCooldown: 10
   PillarParent: {fileID: 1448054031}
-  rotationSpeed: 15
-  isRotating: 0
+  rotationSpeed: 20
+  isRotating: 1
   rotationSpeedIncrease: 10
   colourChangeCDDecrease: 3
   smashCooldown: 5

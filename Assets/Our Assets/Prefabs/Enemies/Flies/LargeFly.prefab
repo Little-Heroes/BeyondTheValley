@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4980160835165422}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftWing_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4747029827277028}
   - component: {fileID: 212656672525144452}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LargeFly_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,9 +51,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4167199007034748}
   - component: {fileID: 95516251838555638}
-  m_Layer: 0
+  - component: {fileID: 50521338627801176}
+  - component: {fileID: 70803572164145088}
+  - component: {fileID: 114997739312278850}
+  m_Layer: 13
   m_Name: LargeFly
-  m_TagString: Untagged
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4324205921425498}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LargeFly_GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4199918508531250}
   - component: {fileID: 212009053044190920}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_LeftWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4780648364714988}
   - component: {fileID: 212622686379069082}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_RightWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4804633588479076}
   - component: {fileID: 212058627423743590}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RegularFly_LeftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611450337119758}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopRightLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -144,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248970586601456}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -160,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4640435284467664}
   - component: {fileID: 212816339195655044}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LargeFly_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4360300751703356}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightWing_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -190,7 +193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4054327250798842}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TopLeftLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -206,7 +209,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4491005071343454}
   - component: {fileID: 212464202094856106}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RegularFly_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4919495972948118}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -237,7 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4151012923548182}
   - component: {fileID: 212244455961512792}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RegularFly_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4583965015991296}
   - component: {fileID: 212778495060967992}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RegularFly_RightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +297,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1194057027712910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.83, y: -1.51, z: 0}
+  m_LocalPosition: {x: -5.68, y: -1.29, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4324205921425498}
@@ -483,6 +486,41 @@ Transform:
   m_Father: {fileID: 4640435284467664}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50521338627801176
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194057027712910}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &70803572164145088
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194057027712910}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.67}
+  m_Size: {x: 3.5, y: 5.5}
+  m_Direction: 0
 --- !u!95 &95516251838555638
 Animator:
   serializedVersion: 3
@@ -501,6 +539,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114997739312278850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194057027712910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5551206767153d445946939209822e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 4
+  minimumRangeDistance: 25
+  imTooCloseDistance: 15
+  player: {fileID: 0}
+  moveSpeed: 10
+  projectile: {fileID: 1586104659038430, guid: d6001369187543e44b96937993247a4c, type: 2}
+  rangedAttackCooldown: 0.5
+  rangedAttackDamage: 1
+  thingy: {x: 0, y: 0, z: 0}
 --- !u!212 &212009053044190920
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -535,7 +593,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300002, guid: 7f7a3f3636c6d914cad867d0905cef80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -719,7 +777,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300002, guid: 7f7a3f3636c6d914cad867d0905cef80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

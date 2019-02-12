@@ -12,6 +12,7 @@ public class OrcKing : MonoBehaviour
     private GameObject player;
 
     [Header("Orc Spawning")]
+    public GameObject[] minions;
     public GameObject orc;
     public Transform[] orcSpawns;
     [SerializeField]
@@ -127,7 +128,9 @@ public class OrcKing : MonoBehaviour
                     else
                         wantToSpawn = true;
                 }
-                Instantiate(orc, orcSpawns[randomSpawn].transform.position, Quaternion.identity);
+                rng = Random.Range(0, minions.Length);
+                if (minions[rng])
+                    Instantiate(minions[rng], orcSpawns[randomSpawn].transform.position, Quaternion.identity);
             }
             //reset orc spawn timer
             orcSpawnTimer = orcSpawnCooldown;

@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4417245791297464}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,9 +35,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4807446193211492}
   - component: {fileID: 95507251592903968}
-  m_Layer: 0
+  - component: {fileID: 50438510928155144}
+  - component: {fileID: 58820767453586456}
+  - component: {fileID: 114801295115403102}
+  m_Layer: 13
   m_Name: SmallFly
-  m_TagString: Untagged
+  m_TagString: Ranged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,7 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4991836287286926}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RightWing_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -66,7 +69,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4652321993341492}
   - component: {fileID: 212275090617873278}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_LeftWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4682444828038914}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftWing_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -97,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4407138432178234}
   - component: {fileID: 212012257004681936}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_RightWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4025552272016044}
   - component: {fileID: 212677938522136992}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SmallFly_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,6 +220,41 @@ Transform:
   m_Father: {fileID: 4417245791297464}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50438510928155144
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182072396575558}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &58820767453586456
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182072396575558}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!95 &95507251592903968
 Animator:
   serializedVersion: 3
@@ -235,6 +273,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114801295115403102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1182072396575558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5551206767153d445946939209822e19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 4
+  minimumRangeDistance: 25
+  imTooCloseDistance: 15
+  player: {fileID: 0}
+  moveSpeed: 10
+  projectile: {fileID: 1586104659038430, guid: d6001369187543e44b96937993247a4c, type: 2}
+  rangedAttackCooldown: 0.5
+  rangedAttackDamage: 1
+  thingy: {x: 0, y: 0, z: 0}
 --- !u!212 &212012257004681936
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -269,7 +327,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300002, guid: 7f7a3f3636c6d914cad867d0905cef80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -315,7 +373,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300002, guid: 7f7a3f3636c6d914cad867d0905cef80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1

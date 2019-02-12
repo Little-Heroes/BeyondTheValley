@@ -8,7 +8,13 @@ TagManager:
   - Orc King
   - PlayerProjectile
   - OrcKingProjectile
+<<<<<<< HEAD
   - Charge Bar
+=======
+  - Charge
+  - FreeRoam
+  - Ranged
+>>>>>>> dd33fbbc6296404ae71a91b2340ca85c172c4204
   layers:
   - Default
   - TransparentFX
@@ -22,10 +28,10 @@ TagManager:
   - Player
   - OrcKingProjectile
   - OrcKing
-  - 
-  - 
-  - 
-  - 
+  - RangedEnemyProjectile
+  - RangedEnemy
+  - ChargeEnemy
+  - FreeRoamEnemy
   - 
   - 
   - 
