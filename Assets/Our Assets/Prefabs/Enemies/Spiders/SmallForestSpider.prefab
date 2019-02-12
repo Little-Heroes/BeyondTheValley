@@ -460,11 +460,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db18f376de4af4b4ea994ae52761401d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  timeBetweenMovements: 0.5
+  health: 1
+  timeBetweenMovements: 0.6
   moveDistance: 5
-  moveSpeed: 0.15
-  followSpeed: 10
+  moveSpeed: 0.2
+  followSpeed: 6
   distanceNear: 15
 --- !u!212 &212163483538540288
 SpriteRenderer:
