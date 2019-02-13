@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 50045053054915864}
   - component: {fileID: 58811425659328816}
   - component: {fileID: 114473779471639514}
-  - component: {fileID: 95728663969453630}
+  - component: {fileID: 95734220839900980}
   m_Layer: 15
   m_Name: ForestSpider
   m_TagString: FreeRoam
@@ -549,7 +549,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5
---- !u!95 &95728663969453630
+--- !u!95 &95734220839900980
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
