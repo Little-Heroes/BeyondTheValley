@@ -43,7 +43,9 @@ public class RoomBlock : MonoBehaviour {
             return dimentions;
         }
     }
-    
+
+    private bool cleared = false;
+
     public int getNumDoors() {
         int retVal = 0;
         if ((int)northNode.myType == 1) retVal++; if ((int)eastNode.myType == 1) retVal++;
@@ -157,7 +159,13 @@ public class RoomBlock : MonoBehaviour {
         if (westNode.myType  == Node.Type.secretDoorNode || northNode.myType == Node.Type.wallNode) {
             /*create a wall room block*/
         }
-        
+
+        //--------------------------
+        //fill the room
+        //--------------------------
+        FillOutRoom();
+
+
         return outPut;
     }
 
@@ -173,9 +181,14 @@ public class RoomBlock : MonoBehaviour {
     }
 
     public void FillOutRoom() {
-        //do obstacle placement
+        SpawnObstacles();
         DecorateRoom();
         PopulateRoom();
+    }
+
+    private void SpawnObstacles()
+    {
+        
     }
 
     private void DecorateRoom() {
@@ -189,13 +202,24 @@ public class RoomBlock : MonoBehaviour {
     private void OnEnterRoom()
     {
         //check if room is cleared
+        if (cleared)
+            return;
         //if not close all the doors and
+        CloseDoors();
         //wake the enemies in the room
+        WakeEnemies();
         //when the room get's cleared
+        StartCoroutine(CheckCleared());
         //spawn rewards in the closest tile to the centre
         //open the doors
         //do nothing if the room is cleared
     }
+
+    private void CloseDoors()
+    {
+        
+    }
+
 
     private void WakeEnemies() {
 

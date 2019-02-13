@@ -154,6 +154,9 @@ public class Player : MonoBehaviour
 
     public bool stickAcceleration = true;
 
+    [Range(0, 1)]
+    public float slowMult = 0.8f;
+
     private Rigidbody2D rb2D;
 
     private Vector2 velocity;
@@ -281,7 +284,7 @@ public class Player : MonoBehaviour
         //Smoothes the player when they stop moving so it's not so jerky
         if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
         {
-            velocity = (lastVelocity * 0.8f);
+            velocity = (lastVelocity * slowMult);
         }
         //do stuff with last velocity mayhaps?
         lastVelocity = velocity;
@@ -390,5 +393,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+        //rb2D.velocity = velocity * Time.fixedDeltaTime;
     }
 }
