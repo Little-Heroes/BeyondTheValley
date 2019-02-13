@@ -306,7 +306,7 @@ Prefab:
     - target: {fileID: 114492658636659530, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
         type: 2}
       propertyPath: stickAcceleration
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
@@ -1723,6 +1723,11 @@ Prefab:
         type: 2}
       propertyPath: m_Color.a
       value: 0.3137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 114237209599925342, guid: 486658b6e41997a41be5d0b9200265a4,
+        type: 2}
+      propertyPath: isFixed
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 486658b6e41997a41be5d0b9200265a4, type: 2}
