@@ -380,6 +380,6 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+        rb2D.velocity = /*rb2D.position + */velocity * Time.fixedDeltaTime * 100;
     }
 }
