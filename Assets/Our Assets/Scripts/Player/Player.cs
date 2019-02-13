@@ -152,6 +152,8 @@ public class Player : MonoBehaviour
     [Tooltip("The movement joystick for mobile controls")]
     public Joystick movementControl;
 
+    public bool stickAcceleration = true;
+
     private Rigidbody2D rb2D;
 
     private Vector2 velocity;
@@ -164,6 +166,8 @@ public class Player : MonoBehaviour
     #region Shooting
     [Tooltip("The shooting joystick for mobile controls")]
     public Joystick shootingControl;
+
+    public bool smoothedShooting = true;
 
     public Button chargedShotButton;
 
@@ -260,15 +264,16 @@ public class Player : MonoBehaviour
         if (movementControl != null)
         {
             if (movementControl.Direction.sqrMagnitude > 0) { frameVel = movementControl.Direction; }
+            if (!stickAcceleration) frameVel.Normalize();
         }
 
         velocity = frameVel * moveSpeed;
 
         //Smoothes the player when they stop moving so it's not so jerky
-        if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
-        {
-            velocity = (lastVelocity * 0.8f);
-        }
+        //if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
+        //{
+        //    velocity = (lastVelocity * 0.8f);
+        //}
         //do stuff with last velocity mayhaps?
         lastVelocity = velocity;
         #endregion velocity
@@ -294,16 +299,22 @@ public class Player : MonoBehaviour
         #region mobile shooting controls
         if (movementControl != null)
         {
-            //if (shootingControl.Horizontal  >   0.1f)   { shootDir.x += 1; isShooting = true; }
-            //if (shootingControl.Horizontal  <  -0.1f)   { shootDir.x -= 1; isShooting = true; }
-            //if (shootingControl.Vertical    >   0.1f)   { shootDir.y += 1; isShooting = true; }
-            //if (shootingControl.Vertical    <  -0.1f)   { shootDir.y -= 1; isShooting = true; }
-
-            if (shootingControl.Direction.sqrMagnitude > 0) { shootDir = shootingControl.Direction; isShooting = true; }
+            if (smoothedShooting)
+            {
+                if (shootingControl.Direction.sqrMagnitude > 0) { shootDir = shootingControl.Direction; isShooting = true; }
+            }
+            else
+            {
+                if (shootingControl.Horizontal > 0.1f) { shootDir.x += 1; isShooting = true; }
+                if (shootingControl.Horizontal < -0.1f) { shootDir.x -= 1; isShooting = true; }
+                if (shootingControl.Vertical > 0.1f) { shootDir.y += 1; isShooting = true; }
+                if (shootingControl.Vertical < -0.1f) { shootDir.y -= 1; isShooting = true; }
+            }
             //if (movementControl.helddowntime > Time.deltaTime) { isCharging = true; }
             //else { isCharging = false; }
         }
         #endregion mobile shooting controls
+
         //Based on inputs shoot a projectile in the intended direction
         if (isShooting && shotTimer <= Time.time && (!Input.GetKey(KeyCode.Space) /*|| !isCharging */))
         {

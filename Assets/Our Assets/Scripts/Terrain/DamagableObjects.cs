@@ -15,6 +15,8 @@ public class DamagableObjects : MonoBehaviour {
     [Range(0, 100)]
     public int health = 1;
 
+    public GameObject destroyParticles;
+
     public List<GameObject> spawnAbles;
 
     [Range(0,1)]
@@ -38,7 +40,13 @@ public class DamagableObjects : MonoBehaviour {
 
     private void DoDead()
     {
-        if(spawnType == SpawnType.All)
+        if (destroyParticles != null)
+        {
+            GameObject go = 
+                Instantiate(destroyParticles, transform.position, Quaternion.identity);
+            Destroy(go, 3);
+        }
+        if (spawnType == SpawnType.All)
         {
             for (int i = 0; i < spawnAbles.Count; i++)
             {
