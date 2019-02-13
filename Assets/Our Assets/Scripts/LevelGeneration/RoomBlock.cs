@@ -54,22 +54,27 @@ public class RoomBlock : MonoBehaviour {
     [HideInInspector]
     public int distFromCore;
 
-#region The things to be within this room block
+    #region The things to be within this room block
+
     //obstacle spots
     public List<Transform> obstacleSpots;
     //obstacles
     public List<GameObject> obstacles;
+
     //decoration spots
     public List<Transform> decorationSpots;
     //avalible decorations
     public List<GameObject> decorations;
+
     //enemy spawn spots
     public List<Transform> enemySpawnSpots;
     //avalible enemies
     public List<GameObject> enemies;
+
     //avalible rewards
     public List<GameObject> rewards;
-#endregion
+
+    #endregion
 
     [Tooltip("These are the room blocks that will form a larger room," +
         "Only fill out what will be there")]
@@ -179,6 +184,17 @@ public class RoomBlock : MonoBehaviour {
 
     private void PopulateRoom() {
 
+    }
+
+    private void OnEnterRoom()
+    {
+        //check if room is cleared
+        //if not close all the doors and
+        //wake the enemies in the room
+        //when the room get's cleared
+        //spawn rewards in the closest tile to the centre
+        //open the doors
+        //do nothing if the room is cleared
     }
 
     private void WakeEnemies() {
