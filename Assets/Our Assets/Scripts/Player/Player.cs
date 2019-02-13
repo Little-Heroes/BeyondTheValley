@@ -250,6 +250,15 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    public void TakeDamage(int _damage)
+    {
+        health -= _damage;
+        if (health <= 0) Die();
+    }
+
+    private void Die() { }
+
     private void Update()
     {
         #region velocity
@@ -270,10 +279,10 @@ public class Player : MonoBehaviour
         velocity = frameVel * moveSpeed;
 
         //Smoothes the player when they stop moving so it's not so jerky
-        //if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
-        //{
-        //    velocity = (lastVelocity * 0.8f);
-        //}
+        if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
+        {
+            velocity = (lastVelocity * 0.8f);
+        }
         //do stuff with last velocity mayhaps?
         lastVelocity = velocity;
         #endregion velocity
