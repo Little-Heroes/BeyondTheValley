@@ -99,7 +99,13 @@ public class OrcKing : MonoBehaviour
 
 
         if (isRotating)
+        {
             PillarParent.transform.Rotate(Vector3.forward * (rotationSpeed * Time.deltaTime));
+            foreach(Transform go in PillarParent.transform)
+            {
+                go.rotation = Quaternion.identity;
+            }
+        }
 
         healthText.text = health.ToString();
 

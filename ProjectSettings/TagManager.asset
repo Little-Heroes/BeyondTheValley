@@ -7,6 +7,12 @@ TagManager:
   - PlayerProjectile
   - MoveStick
   - ShootStick
+  - FreeRoam
+  - Ranged
+  - Orc King
+  - Charge
+  - OrcKingProjectile
+  - RangedProjectile
   layers:
   - Default
   - TransparentFX
@@ -18,12 +24,12 @@ TagManager:
   - 
   - Player
   - PlayerProjectile
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - OrcKing
+  - OrcKingProjectile
+  - Charge
+  - Range
+  - Melee
+  - RangedEnemyProjectile
   - 
   - 
   - 

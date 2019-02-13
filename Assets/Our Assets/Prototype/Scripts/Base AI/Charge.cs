@@ -75,8 +75,8 @@ public class Charge : MonoBehaviour
             GameObject go = collision.gameObject;
             if (go.tag == "Player")
             {
-                TempPlayerController tpc = go.GetComponent<TempPlayerController>();
-                tpc.TakeDamage(chargeDamageAmount);
+                Player tpc = go.GetComponent<Player>();
+                tpc.TakeDamage((int)chargeDamageAmount);
             }
 
         }
@@ -89,7 +89,7 @@ public class Charge : MonoBehaviour
         {
             if (contactDamagetimer <= 0)
             {
-                collGO.GetComponent<TempPlayerController>().TakeDamage(chargeDamageAmount);
+                collGO.GetComponent<Player>().TakeDamage((int)chargeDamageAmount);
                 contactDamagetimer = contactDamageCooldown;
             }
         }
