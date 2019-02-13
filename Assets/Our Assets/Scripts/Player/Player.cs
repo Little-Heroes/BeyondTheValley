@@ -228,8 +228,22 @@ public class Player : MonoBehaviour
         foreach (Item item in startingItems) { items.Add(item); }
         #endregion Filling out Items
 
+        DontDestroyOnLoad(gameObject);
         rb2D = GetComponent<Rigidbody2D>();
         velocity = Vector2.zero;
+    }
+
+    private void Start()
+    {
+        //get things in the scene
+        VariableJoystick[] variableJoysticks = FindObjectsOfType<VariableJoystick>();
+        for (int i = 0; i < variableJoysticks.Length; i++)
+        {        
+            if (variableJoysticks[i].CompareTag("MoveStick"))
+                movementControl = variableJoysticks[i];
+            if (variableJoysticks[i].CompareTag("ShootStick"))
+                shootingControl = variableJoysticks[i];
+        }
     }
 
     private void Update()
@@ -240,6 +254,9 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.S)) { frameVel.y -= 1; }
         if (Input.GetKey(KeyCode.D)) { frameVel.x += 1; }
         if (Input.GetKey(KeyCode.A)) { frameVel.x -= 1; }
+
+        if (movementControl.Direction.sqrMagnitude > 0) { frameVel = movementControl.Direction; }
+       
 
         velocity = frameVel.normalized * moveSpeed;
 
@@ -259,31 +276,31 @@ public class Player : MonoBehaviour
         bool releasedKey = false;
 
         #region pc shooting controls
-        if (Input.GetKey(KeyCode.UpArrow))      { shootDir.y += 1; isShooting = true; }
-        if (Input.GetKey(KeyCode.DownArrow))    { shootDir.y -= 1; isShooting = true; }
-        if (Input.GetKey(KeyCode.RightArrow))   { shootDir.x += 1; isShooting = true; }
-        if (Input.GetKey(KeyCode.LeftArrow))    { shootDir.x -= 1; isShooting = true; }
-
         if (Input.GetKeyUp(KeyCode.UpArrow))    { releasedKey = true; }
         if (Input.GetKeyUp(KeyCode.DownArrow))  { releasedKey = true; }
         if (Input.GetKeyUp(KeyCode.RightArrow)) { releasedKey = true; }
         if (Input.GetKeyUp(KeyCode.LeftArrow))  { releasedKey = true; }
+
+        if (Input.GetKey(KeyCode.UpArrow))      { shootDir.y += 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.DownArrow))    { shootDir.y -= 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.RightArrow))   { shootDir.x += 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.LeftArrow))    { shootDir.x -= 1; isShooting = true; releasedKey = false; }
         #endregion pc shooting controls
 
         #region mobile shooting controls
         if (movementControl != null)
         {
-            if (movementControl.Horizontal > 0.5f)  { shootDir.x += 1; isShooting = true; }
-            if (movementControl.Horizontal < -0.5f) { shootDir.x -= 1; isShooting = true; }
-            if (movementControl.Vertical > 0.5f)    { shootDir.y += 1; isShooting = true; }
-            if (movementControl.Vertical < -0.5f)   { shootDir.y -= 1; isShooting = true; }
+            if (shootingControl.Horizontal  >   0.1f)   { shootDir.x += 1; isShooting = true; }
+            if (shootingControl.Horizontal  <  -0.1f)   { shootDir.x -= 1; isShooting = true; }
+            if (shootingControl.Vertical    >   0.1f)   { shootDir.y += 1; isShooting = true; }
+            if (shootingControl.Vertical    <  -0.1f)   { shootDir.y -= 1; isShooting = true; }
 
             //if (movementControl.helddowntime > Time.deltaTime) { isCharging = true; }
             //else { isCharging = false; }
         }
         #endregion mobile shooting controls
         //Based on inputs shoot a projectile in the intended direction
-        if (isShooting && shotTimer <= Time.time && (!Input.GetKey(KeyCode.Space) || !isCharging ))
+        if (isShooting && shotTimer <= Time.time && (!Input.GetKey(KeyCode.Space) /*|| !isCharging */))
         {
             if (projectile != null)
             {
@@ -309,7 +326,6 @@ public class Player : MonoBehaviour
             else
             {
                 chargedShotTimer += Time.deltaTime;
-                isCharging = true;
             }
             chargeBar.fillAmount = chargedShotTimer / chargeTime;
 
@@ -334,7 +350,6 @@ public class Player : MonoBehaviour
         }
         else if (chargedShotTimer > 0 && !Input.GetKey(KeyCode.Space))
         {
-            isCharging = false;
             chargeBar.fillAmount = chargedShotTimer / chargeTime;
             if (chargeBar.fillAmount == 1) { chargeBar.color = new Color(1, 0, 0.75f); }
             else { chargeBar.color = Color.white; }
