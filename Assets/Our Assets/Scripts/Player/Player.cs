@@ -255,10 +255,14 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) { frameVel.x += 1; }
         if (Input.GetKey(KeyCode.A)) { frameVel.x -= 1; }
 
-        if (movementControl.Direction.sqrMagnitude > 0) { frameVel = movementControl.Direction; }
-       
+        frameVel.Normalize();
 
-        velocity = frameVel.normalized * moveSpeed;
+        if (movementControl != null)
+        {
+            if (movementControl.Direction.sqrMagnitude > 0) { frameVel = movementControl.Direction; }
+        }
+
+        velocity = frameVel * moveSpeed;
 
         //Smoothes the player when they stop moving so it's not so jerky
         if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
@@ -290,11 +294,12 @@ public class Player : MonoBehaviour
         #region mobile shooting controls
         if (movementControl != null)
         {
-            if (shootingControl.Horizontal  >   0.1f)   { shootDir.x += 1; isShooting = true; }
-            if (shootingControl.Horizontal  <  -0.1f)   { shootDir.x -= 1; isShooting = true; }
-            if (shootingControl.Vertical    >   0.1f)   { shootDir.y += 1; isShooting = true; }
-            if (shootingControl.Vertical    <  -0.1f)   { shootDir.y -= 1; isShooting = true; }
+            //if (shootingControl.Horizontal  >   0.1f)   { shootDir.x += 1; isShooting = true; }
+            //if (shootingControl.Horizontal  <  -0.1f)   { shootDir.x -= 1; isShooting = true; }
+            //if (shootingControl.Vertical    >   0.1f)   { shootDir.y += 1; isShooting = true; }
+            //if (shootingControl.Vertical    <  -0.1f)   { shootDir.y -= 1; isShooting = true; }
 
+            if (shootingControl.Direction.sqrMagnitude > 0) { shootDir = shootingControl.Direction; isShooting = true; }
             //if (movementControl.helddowntime > Time.deltaTime) { isCharging = true; }
             //else { isCharging = false; }
         }
