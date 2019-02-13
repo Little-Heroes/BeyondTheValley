@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4141947605987880}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LeftLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4719942442011628}
   - component: {fileID: 212543240017818332}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_LowerMidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4974931562593798}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LowerMidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -65,7 +65,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4269259617656094}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4440131280403538}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: UpperLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4566134397767708}
   - component: {fileID: 212386884533371548}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4462962018581778}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LowerLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4899963792424302}
   - component: {fileID: 212842477230169792}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_LowerMidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4847409323975660}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: UpperMidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4387916685370492}
   - component: {fileID: 212282492966056006}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4756818721897816}
   - component: {fileID: 212924735264284398}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_UpperMidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4501380005860530}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: RightLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4585557023904842}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: UpperMidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4783442005939912}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LowerLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4786853131379840}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LowerMidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 58906902473227494}
   - component: {fileID: 114370921840415364}
   - component: {fileID: 95101678361014312}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider
   m_TagString: FreeRoam
   m_Icon: {fileID: 0}
@@ -268,7 +268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4364340377697864}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: UpperLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -284,7 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4962951838752830}
   - component: {fileID: 212641828929276262}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -300,7 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4125797713580694}
   - component: {fileID: 212222857777429690}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4314685142330514}
   - component: {fileID: 212067078396584012}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_UpperMidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4058889800745502}
   - component: {fileID: 212126365327061658}
-  m_Layer: 15
+  m_Layer: 14
   m_Name: LargeForestSpider_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
