@@ -180,6 +180,7 @@ public class RoomBlock : MonoBehaviour {
         return false;
     }
 
+    #region build within room
     public void FillOutRoom() {
         SpawnObstacles();
         DecorateRoom();
@@ -198,7 +199,9 @@ public class RoomBlock : MonoBehaviour {
     private void PopulateRoom() {
 
     }
+    #endregion
 
+    #region player interactions with room
     private void OnEnterRoom()
     {
         //check if room is cleared
@@ -209,7 +212,7 @@ public class RoomBlock : MonoBehaviour {
         //wake the enemies in the room
         WakeEnemies();
         //when the room get's cleared
-        StartCoroutine(CheckCleared());
+      //  StartCoroutine(CheckCleared());
         //spawn rewards in the closest tile to the centre
         //open the doors
         //do nothing if the room is cleared
@@ -228,4 +231,6 @@ public class RoomBlock : MonoBehaviour {
     private void SpawnRewards() {
 
     }
+
+    #endregion
 }
