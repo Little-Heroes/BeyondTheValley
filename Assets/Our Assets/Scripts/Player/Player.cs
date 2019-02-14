@@ -190,6 +190,14 @@ public class Player : MonoBehaviour
 
     #endregion Shooting
 
+    [Header("Invincibility")]
+    public float invincibleTimeAmount;
+    private bool invincible = false;
+    float invincibleTimer;
+    public bool takeDamage = false;
+    public float timeBetweenBlinks;
+    float blinkTimer = 0.0f;
+
     private void Awake()
     {
         #region applying stats 
@@ -253,18 +261,39 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    #region damage handling
     public void TakeDamage(int _damage)
     {
+        takeDamage = false;
+        if (invincible) return;
         health -= _damage;
+        invincible = true;
         if (health <= 0) Die();
     }
 
-    private void Die() { }
+    private void Die()
+    {
+        
+    }
+
+    public void Blink()
+    {
+        blinkTimer -= Time.deltaTime;
+        if (blinkTimer <= 0)
+        {
+            Renderer[] things = gameObject.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in things)
+            {
+                r.enabled = !r.enabled;
+                blinkTimer = timeBetweenBlinks;
+            }
+        }
+    }
+    #endregion damage handling
 
     private void Update()
     {
-        #region velocity
+        #region movement
         Vector2 frameVel = Vector2.zero;
         if (Input.GetKey(KeyCode.W)) { frameVel.y += 1; }
         if (Input.GetKey(KeyCode.S)) { frameVel.y -= 1; }
@@ -288,7 +317,7 @@ public class Player : MonoBehaviour
         }
         //do stuff with last velocity mayhaps?
         lastVelocity = velocity;
-        #endregion velocity
+        #endregion movement
 
         #region shooting
 
@@ -335,7 +364,7 @@ public class Player : MonoBehaviour
                 TempProjectile p;
                 p = Instantiate(projectile, rb2D.position, Quaternion.identity);
                 p.transform.Rotate(new Vector3(0, 0, 1), (180 * Mathf.Atan2(shootDir.y, shootDir.x)) / Mathf.PI - 90);
-                p.speed = projectileSpeed;
+                p.speed = projectileSpeed + velocity.magnitude;
                 p.damageAmount = damage;
                 p.lifeTime = projectileRange;
             }
@@ -388,11 +417,31 @@ public class Player : MonoBehaviour
         wasShooting = isShooting;
         lastshootDir = shootDir;
         #endregion shooting
+
+        #region invincible
+        if (takeDamage) TakeDamage(1);
+
+        if (invincible)
+        {
+            Blink();
+            invincibleTimer -= Time.deltaTime;
+            if (invincibleTimer <= 0)
+            {
+                invincible = false;
+                invincibleTimer = invincibleTimeAmount;
+                Renderer[] things = gameObject.GetComponentsInChildren<Renderer>();
+                foreach (Renderer r in things)
+                {
+                    r.enabled = true;
+                }
+            }
+        }
+        #endregion invincible
     }
 
     private void FixedUpdate()
     {
-        rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-        //rb2D.velocity = velocity * Time.fixedDeltaTime;
+        //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+        rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
     }
 }
