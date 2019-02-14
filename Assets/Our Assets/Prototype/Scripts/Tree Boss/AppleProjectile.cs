@@ -20,4 +20,9 @@ public class AppleProjectile : MonoBehaviour {
     {
         transform.position = transform.position + (transform.right * Mathf.Sin(Time.time * frequency) * magnitude) + transform.up * moveSpeed * Time.deltaTime;
 	}
+
+    public void DealDamage()
+    {
+
+    }
 }

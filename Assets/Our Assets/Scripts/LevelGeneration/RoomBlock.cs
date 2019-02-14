@@ -209,7 +209,7 @@ public class RoomBlock : MonoBehaviour {
         //wake the enemies in the room
         WakeEnemies();
         //when the room get's cleared
-        StartCoroutine(CheckCleared());
+        //StartCoroutine(CheckCleared());
         //spawn rewards in the closest tile to the centre
         //open the doors
         //do nothing if the room is cleared

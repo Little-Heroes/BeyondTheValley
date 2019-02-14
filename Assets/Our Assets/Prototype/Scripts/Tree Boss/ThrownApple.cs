@@ -19,6 +19,7 @@ public class ThrownApple : MonoBehaviour
     public float frequency;
     public float magnitude;
     public Vector3 direction;
+    public Animation anim;
 
     Vector3 velocity;
 
@@ -31,9 +32,16 @@ public class ThrownApple : MonoBehaviour
 
     public Vector3 whereIamGoing;
     float startTime;
+
+    public LayerMask Boss;
+    public GameObject warningCircle;
     // Use this for initialization
     void Start()
     {
+        anim = GetComponent<Animation>();
+        boundsUp = GameObject.FindGameObjectWithTag("TreeBoundsUp");
+        boundsDown = GameObject.FindGameObjectWithTag("TreeBoundsDown");
+
         whereIamGoing = firstPos;
         waitTimer = waitAmount;
         startPos = transform.position;
@@ -46,24 +54,27 @@ public class ThrownApple : MonoBehaviour
         {
             endPos = new Vector3(firstPos.x, Random.Range(boundsDown.GetComponent<Collider2D>().bounds.min.y, boundsDown.GetComponent<Collider2D>().bounds.max.y), 0);
             index++;
-            if (index >= 100)
+            if (index >= 500)
             {
                 canUse = true;
+                Debug.Log("index > 500");
             }
             else
             {
-                if (Physics2D.OverlapCircle(endPos, colliderRadius))
+                if (Physics2D.OverlapCircle(endPos, colliderRadius, Boss))
                 {
                     index++;
-                    continue;
                 }
                 else
                 {
                     canUse = true;
+                    Debug.Log("Could use it");
                 }
             }
 
         }
+
+
     }
 
     // Update is called once per frame
@@ -79,6 +90,7 @@ public class ThrownApple : MonoBehaviour
             {
                 movingUp = false;
                 whereIamGoing = endPos;
+                warningCircle = Instantiate(warningCircle, endPos, Quaternion.identity);
             }
         }
         else if (!movingUp && !movingDown)
@@ -91,11 +103,16 @@ public class ThrownApple : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPos, moveDownSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, endPos, moveDownSpeed * Time.deltaTime);
+            if (warningCircle)
+                warningCircle.transform.localScale = Vector3.Lerp(warningCircle.transform.localScale, Vector3.zero, moveDownSpeed * Time.deltaTime);
             moveDownSpeed += moveDownSpeedIncrease;
+
             if (Vector3.Distance(transform.position, endPos) < 1.0f)
             {
                 Physics2D.OverlapCircle(transform.position, colliderRadius);
+                Destroy(warningCircle);
+                anim.Play();
             }
         }
 
