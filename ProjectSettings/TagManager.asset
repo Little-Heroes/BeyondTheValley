@@ -35,7 +35,7 @@ TagManager:
   - RangedEnemyProjectile
   - Boss
   - BossProjectile
-  - 
+  - NotCollideWithPlayer
   - 
   - 
   - 

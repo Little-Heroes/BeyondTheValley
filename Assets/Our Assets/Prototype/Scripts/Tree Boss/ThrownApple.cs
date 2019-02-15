@@ -35,6 +35,7 @@ public class ThrownApple : MonoBehaviour
 
     public LayerMask Boss;
     public GameObject warningCircle;
+    GameObject warnCirc;
     // Use this for initialization
     void Start()
     {
@@ -68,7 +69,6 @@ public class ThrownApple : MonoBehaviour
                 else
                 {
                     canUse = true;
-                    Debug.Log("Could use it");
                 }
             }
 
@@ -90,8 +90,8 @@ public class ThrownApple : MonoBehaviour
             {
                 movingUp = false;
                 whereIamGoing = endPos;
-                warningCircle = Instantiate(warningCircle, endPos, Quaternion.identity);
-            }
+                warnCirc = Instantiate(warningCircle, endPos, Quaternion.identity);
+            } 
         }
         else if (!movingUp && !movingDown)
         {
@@ -104,15 +104,26 @@ public class ThrownApple : MonoBehaviour
         else
         {
             transform.position = Vector3.Lerp(transform.position, endPos, moveDownSpeed * Time.deltaTime);
-            if (warningCircle)
-                warningCircle.transform.localScale = Vector3.Lerp(warningCircle.transform.localScale, Vector3.zero, moveDownSpeed * Time.deltaTime);
+            if (warnCirc)
+                warnCirc.transform.localScale = Vector3.Lerp(warnCirc.transform.localScale, Vector3.zero, moveDownSpeed * Time.deltaTime);
             moveDownSpeed += moveDownSpeedIncrease;
 
             if (Vector3.Distance(transform.position, endPos) < 1.0f)
             {
                 Physics2D.OverlapCircle(transform.position, colliderRadius);
-                Destroy(warningCircle);
-                anim.Play();
+                Destroy(warnCirc);
+                //anim.Play();
+                AppleBomb ab = GetComponent<AppleBomb>();
+                AppleProjectile ap = GetComponent<AppleProjectile>();
+                if(ab)
+                {
+                    ab.StartCountdown();
+                }
+                else if(ap)
+                {
+                    ap.DealDamage();
+                }
+                Destroy(this);
             }
         }
 
@@ -121,5 +132,10 @@ public class ThrownApple : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, colliderRadius);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(warnCirc);
     }
 }
