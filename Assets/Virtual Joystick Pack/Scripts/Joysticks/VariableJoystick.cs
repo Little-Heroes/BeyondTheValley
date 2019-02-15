@@ -9,8 +9,9 @@ public class VariableJoystick : Joystick
 
     Vector2 joystickCenter = Vector2.zero;
 
-    void Start()
+    public override void Start()
     {
+        base.Start();
         if (isFixed)
             OnFixed();
         else
@@ -29,7 +30,22 @@ public class VariableJoystick : Joystick
     public override void OnDrag(PointerEventData eventData)
     {
         Vector2 direction = eventData.position - joystickCenter;
-        inputVector = (direction.magnitude > background.sizeDelta.x / 2f) ? direction.normalized : direction / (background.sizeDelta.x / 2f);
+        //if the joystick is being pulled further than it's max, move the background until that is not the case
+        if(direction.magnitude > background.sizeDelta.x / 2f)
+        {
+            //move the background
+            background.position = Vector3.Lerp(background.position, eventData.position - direction.normalized, 0.05f);
+            //set the input vector
+            inputVector = direction.normalized;
+            //move the centre position for the joystick
+            joystickCenter = background.position;
+            //clamp the background to the touch area
+            //BindBackground();
+        }
+        else inputVector = direction / (background.sizeDelta.x / 2f);
+        //if the magnitude of the direction is larger than the bacground clamp it via a normalisation
+        //otherwise the direction vector is equal to the amount the joystick has moved within the backgrounds bounds
+        //inputVector = (direction.magnitude > background.sizeDelta.x / 2f) ? direction.normalized : direction / (background.sizeDelta.x / 2f);
         ClampJoystick();
         handle.anchoredPosition = (inputVector * background.sizeDelta.x / 2f) * handleLimit;
     }
