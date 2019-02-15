@@ -44,6 +44,18 @@ public class RoomBlock : MonoBehaviour {
         }
     }
 
+    private int NumEnemies
+    {
+        get
+        {
+            int i = 0;
+            //foreach (Enemy enemy in GetComponentInChildren<Enemy>()) {
+            //    i++;
+            //}}
+            return i;
+        }
+    }
+
     private bool cleared = false;
 
     public int getNumDoors() {
@@ -180,11 +192,11 @@ public class RoomBlock : MonoBehaviour {
         return false;
     }
 
+
     #region build within room
     public void FillOutRoom() {
         SpawnObstacles();
         DecorateRoom();
-        PopulateRoom();
     }
 
     private void SpawnObstacles()
@@ -196,8 +208,12 @@ public class RoomBlock : MonoBehaviour {
         /*spawn in random decorative things in the room at the decorate spots*/
     }
 
-    private void PopulateRoom() {
-
+    private void CheckCleared() {
+        if(NumEnemies == 0)
+        {
+            SpawnRewards();
+            OpenDoors();
+        }
     }
     #endregion
 
@@ -208,15 +224,11 @@ public class RoomBlock : MonoBehaviour {
         if (cleared)
             return;
         //if not close all the doors and
-        CloseDoors();
         //wake the enemies in the room
-        WakeEnemies();
+        if(WakeEnemies())
+            CloseDoors();
         //when the room get's cleared
-<<<<<<< HEAD
         //StartCoroutine(CheckCleared());
-=======
-      //  StartCoroutine(CheckCleared());
->>>>>>> bbd4d71cb2229dec468e2d67bc844998ad016cf7
         //spawn rewards in the closest tile to the centre
         //open the doors
         //do nothing if the room is cleared
@@ -224,17 +236,35 @@ public class RoomBlock : MonoBehaviour {
 
     private void CloseDoors()
     {
-        
+        //close the doors in the room
     }
 
 
-    private void WakeEnemies() {
-
+    private bool WakeEnemies() {
+        
+        if (NumEnemies == 0) return false;
+        return true;
     }
 
     private void SpawnRewards() {
-
+        float rng = Random.Range(0, 1);
+        float rsc = 0.2f /*rewardSpawnChance*/;
+        while (rsc > 1)
+        {
+            rsc -= 1;
+            int reward = Random.Range(0, rewards.Count);
+            Instantiate(rewards[reward]);
+        }
+        if(rng <= rsc)
+        {
+            int reward = Random.Range(0, rewards.Count);
+            Instantiate(rewards[reward]);
+        }
     }
 
+    private void OpenDoors()
+    {
+        //do the opposite of close doors
+    }
     #endregion
 }
