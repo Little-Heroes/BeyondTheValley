@@ -27,12 +27,12 @@ public class AI : MonoBehaviour {
 
 
 
-    virtual void DealContactDamage(Player player)
+    public virtual void DealContactDamage(Player player)
     {
         player.TakeDamage(contactDamage);
     }
 
-    virtual void TakeDamage(int amount)
+    public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
         if(currentHealth <= 0)
@@ -41,7 +41,7 @@ public class AI : MonoBehaviour {
         }
     }
 
-    virtual void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }

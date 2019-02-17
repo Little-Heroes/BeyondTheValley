@@ -229,10 +229,7 @@ public class RoomBlock : MonoBehaviour {
             CloseDoors();
         //when the room get's cleared
         //StartCoroutine(CheckCleared());
-<<<<<<< HEAD
-      //  StartCoroutine(CheckCleared());
-=======
->>>>>>> 699d4dfbbb844fce22e9383b8211b97e7c9dcb50
+
         //spawn rewards in the closest tile to the centre
         //open the doors
         //do nothing if the room is cleared
