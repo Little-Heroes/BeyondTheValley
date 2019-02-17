@@ -117,7 +117,6 @@ public class OrcKing : MonoBehaviour
         {
             //pick a random number from 1 to 100
             int rng = Random.Range(0, 101);
-            Debug.Log("RNG = " + rng + ", Chosen chance = " + chanceOfSpawningOrc);
             //if the random number is less than the chance percentage of spawning an orc
             if (rng < chanceOfSpawningOrc)
             {
@@ -177,7 +176,7 @@ public class OrcKing : MonoBehaviour
                     GameObject go = Instantiate(projectile, pos, Quaternion.identity);
                     go.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * -angle, Vector3.forward);
                     TempProjectile tp = go.GetComponent<TempProjectile>();
-                    go.layer = LayerMask.NameToLayer("OrcKingProjectile");
+                    go.layer = LayerMask.NameToLayer("BossProjectile");
                     go.tag = "OrcKingProjectile";
                     tp.damageAmount = 1;
                     tp.speed = projectileSpeed;
@@ -200,7 +199,7 @@ public class OrcKing : MonoBehaviour
                     GameObject go = Instantiate(projectile, pos, Quaternion.identity);
                     go.transform.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * -angle, Vector3.forward);
                     TempProjectile tp = go.GetComponent<TempProjectile>();
-                    go.layer = LayerMask.NameToLayer("OrcKingProjectile");
+                    go.layer = LayerMask.NameToLayer("BossProjectile");
                     go.tag = "OrcKingProjectile";
                     tp.damageAmount = 1;
                     tp.speed = projectileSpeed;
