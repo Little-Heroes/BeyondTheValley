@@ -18,6 +18,10 @@ public class AppleBomb : MonoBehaviour
     public GameObject warnCirc;
     public float moveSpeed;
 
+    public float changeDirectionTimer;
+    public float changeDirectionCooldown;
+    Vector2 direction;
+
     // Use this for initialization
     void Start()
     {
@@ -42,6 +46,19 @@ public class AppleBomb : MonoBehaviour
                 StartCountdown();
                 thrown = false;
             }
+        }
+        if(hasLanded)
+        {
+            if (changeDirectionTimer <= 0)
+            {
+                direction = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
+                changeDirectionTimer = changeDirectionCooldown;
+            }
+            else
+            {
+                changeDirectionTimer -= Time.deltaTime;
+            }
+            transform.position = Vector3.Lerp(transform.position, transform.position + (Vector3)direction * moveSpeed, Time.deltaTime);
         }
         if (countingDown)
         {

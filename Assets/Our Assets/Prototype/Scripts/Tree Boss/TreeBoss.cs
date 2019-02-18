@@ -87,6 +87,7 @@ public class TreeBoss : MonoBehaviour
 
         if (droppingBombs)
         {
+            rainApplesTimer = rainApplesCooldown;
             if (bombDropTimer > 0)
             {
                 bombDropTimer -= Time.deltaTime;

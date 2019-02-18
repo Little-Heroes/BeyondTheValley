@@ -118,6 +118,7 @@ public class ThrownApple : MonoBehaviour
                 if(ab)
                 {
                     ab.StartCountdown();
+                    ab.SetHasLanded();
                 }
                 else if(ap)
                 {

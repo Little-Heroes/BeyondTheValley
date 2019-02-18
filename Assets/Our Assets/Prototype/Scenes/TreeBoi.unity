@@ -1575,7 +1575,7 @@ MonoBehaviour:
   bombChance: 25
   shotCooldown: 0.5
   bombDropCooldown: 2.5
-  numberOfBombs: 30
+  numberOfBombs: 15
   circleRadius: 10
   bossParentTransform: {fileID: 1628699597}
 --- !u!1 &1891953994

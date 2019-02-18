@@ -113,6 +113,8 @@ MonoBehaviour:
   shadow: {fileID: 1924305366704508, guid: 370fd363347251c47b6d40f8bae16035, type: 2}
   warnCirc: {fileID: 0}
   moveSpeed: 1.5
+  changeDirectionTimer: 0
+  changeDirectionCooldown: 0
 --- !u!212 &212758589183981056
 SpriteRenderer:
   m_ObjectHideFlags: 1
