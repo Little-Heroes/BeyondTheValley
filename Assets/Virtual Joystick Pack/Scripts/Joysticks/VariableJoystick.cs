@@ -6,6 +6,8 @@ public class VariableJoystick : Joystick
     [Header("Variable Joystick Options")]
     public bool isFixed = true;
     public Vector2 fixedScreenPosition;
+    [Range(0.01f,1)]
+    public float snapDist = 0.05f;
 
     Vector2 joystickCenter = Vector2.zero;
 
@@ -34,7 +36,7 @@ public class VariableJoystick : Joystick
         if(direction.magnitude > background.sizeDelta.x / 2f)
         {
             //move the background
-            background.position = Vector3.Lerp(background.position, eventData.position - direction.normalized, 0.05f);
+            background.position = Vector3.Lerp(background.position, eventData.position - direction.normalized, snapDist);
             //set the input vector
             inputVector = direction.normalized;
             //move the centre position for the joystick
