@@ -190,15 +190,20 @@ public class Player : MonoBehaviour
 
     #endregion Shooting
 
+    #region AI party
+    public AI[] partyMembers = new AI[5];
+
+    public float possessionTime;
+    #endregion AI party
+
     [Header("Invincibility")]
     public float invincibleTimeAmount;
     private bool invincible = false;
     float invincibleTimer;
-    public bool takeDamage = false;
     public float timeBetweenBlinks;
     float blinkTimer = 0.0f;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         #region applying stats 
         //health
@@ -248,7 +253,7 @@ public class Player : MonoBehaviour
         velocity = Vector2.zero;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         //get things in the scene
         VariableJoystick[] variableJoysticks = FindObjectsOfType<VariableJoystick>();
@@ -262,21 +267,20 @@ public class Player : MonoBehaviour
     }
 
     #region damage handling
-    public void TakeDamage(int _damage)
+    public virtual void TakeDamage(int _damage)
     {
-        takeDamage = false;
         if (invincible) return;
         health -= _damage;
         invincible = true;
         if (health <= 0) Die();
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         
     }
 
-    public void Blink()
+    public virtual void Blink()
     {
         blinkTimer -= Time.deltaTime;
         if (blinkTimer <= 0)
@@ -291,9 +295,14 @@ public class Player : MonoBehaviour
     }
     #endregion damage handling
 
-    private void Update()
+    private void Possess()
     {
-        #region movement
+
+    }
+
+
+    protected void UpdateMovement()
+    {
         Vector2 frameVel = Vector2.zero;
         if (Input.GetKey(KeyCode.W)) { frameVel.y += 1; }
         if (Input.GetKey(KeyCode.S)) { frameVel.y -= 1; }
@@ -317,24 +326,24 @@ public class Player : MonoBehaviour
         }
         //do stuff with last velocity mayhaps?
         lastVelocity = velocity;
-        #endregion movement
+    }
 
-        #region shooting
-
+    protected void UpdateShooting()
+    {
         Vector2 shootDir = Vector2.zero;
         bool isShooting = false;
         bool releasedKey = false;
 
         #region pc shooting controls
-        if (Input.GetKeyUp(KeyCode.UpArrow))    { releasedKey = true; }
-        if (Input.GetKeyUp(KeyCode.DownArrow))  { releasedKey = true; }
+        if (Input.GetKeyUp(KeyCode.UpArrow)) { releasedKey = true; }
+        if (Input.GetKeyUp(KeyCode.DownArrow)) { releasedKey = true; }
         if (Input.GetKeyUp(KeyCode.RightArrow)) { releasedKey = true; }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))  { releasedKey = true; }
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) { releasedKey = true; }
 
-        if (Input.GetKey(KeyCode.UpArrow))      { shootDir.y += 1; isShooting = true; releasedKey = false; }
-        if (Input.GetKey(KeyCode.DownArrow))    { shootDir.y -= 1; isShooting = true; releasedKey = false; }
-        if (Input.GetKey(KeyCode.RightArrow))   { shootDir.x += 1; isShooting = true; releasedKey = false; }
-        if (Input.GetKey(KeyCode.LeftArrow))    { shootDir.x -= 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.UpArrow)) { shootDir.y += 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.DownArrow)) { shootDir.y -= 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.RightArrow)) { shootDir.x += 1; isShooting = true; releasedKey = false; }
+        if (Input.GetKey(KeyCode.LeftArrow)) { shootDir.x -= 1; isShooting = true; releasedKey = false; }
         #endregion pc shooting controls
 
         #region mobile shooting controls
@@ -416,11 +425,10 @@ public class Player : MonoBehaviour
         }
         wasShooting = isShooting;
         lastshootDir = shootDir;
-        #endregion shooting
+    }
 
-        #region invincible
-        if (takeDamage) TakeDamage(1);
-
+    protected void InvincibilityChecks()
+    {
         if (invincible)
         {
             Blink();
@@ -436,10 +444,16 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        #endregion invincible
     }
 
-    private void FixedUpdate()
+    protected virtual void Update()
+    {
+        UpdateMovement();
+        UpdateShooting();
+        InvincibilityChecks();
+    }
+
+    protected virtual void FixedUpdate()
     {
         //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
         rb2D.velocity = velocity * Time.fixedDeltaTime * 100;

@@ -6,7 +6,8 @@ public class DamagableObjects : MonoBehaviour {
     
     private enum SpawnType
     {
-        All = 0,
+        None = 0,
+        All,
         RandomOne,
         RandomAll,
         RandomX
@@ -46,7 +47,8 @@ public class DamagableObjects : MonoBehaviour {
                 Instantiate(destroyParticles, transform.position, Quaternion.identity);
             Destroy(go, 3);
         }
-        if (spawnType == SpawnType.All)
+        if (spawnType == SpawnType.None) { }
+        else if (spawnType == SpawnType.All)
         {
             for (int i = 0; i < spawnAbles.Count; i++)
             {
@@ -68,7 +70,6 @@ public class DamagableObjects : MonoBehaviour {
         }
         else if (spawnType == SpawnType.RandomX)
         {
-            if (x > spawnAbles.Count) x = spawnAbles.Count;
             for (int i = 0; i < x; i++)
             {
                 int rand = Random.Range(0, spawnAbles.Count);
