@@ -14,7 +14,7 @@ public class Possession : Player {
         possessed = GetComponent<AI>();
         MoveSpeed = possessed.movementSpeed;
         MaxHealth = possessed.maxHealth;
-        Health = possessed.currentHealth;
+        Health = possessed.maxHealth;
         possessionTimer = Time.time + possesser.possessionTime;
         possesser.enabled = false;
     }
@@ -34,6 +34,15 @@ public class Possession : Player {
     protected override void Die()
     {
         UnPossess();
+    }
+
+    public void OnKill(string enemyType, float possessTimePlus)
+    {
+        if(/*possessed.AIType == enemyType*/false)
+        {
+            possessionTimer += possessTimePlus * 2;
+        }
+        possessionTimer += possessTimePlus;
     }
 
     private void UnPossess()

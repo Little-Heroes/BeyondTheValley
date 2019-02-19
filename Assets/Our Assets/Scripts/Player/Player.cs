@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     //The set up for the player
     //-----------------------
     #region player set up in editor
+    [Header("Stats")]
     [Header("Health")]
     public int baseMaxHealth;
 
@@ -149,6 +150,7 @@ public class Player : MonoBehaviour
     #endregion Items
 
     #region Movement
+    [Header("Joystick")]
     [Tooltip("The movement joystick for mobile controls")]
     public Joystick movementControl;
 
@@ -156,6 +158,8 @@ public class Player : MonoBehaviour
 
     [Range(0, 1)]
     public float slowMult = 0.8f;
+
+    public Animator anim;
 
     private Rigidbody2D rb2D;
 
@@ -248,7 +252,6 @@ public class Player : MonoBehaviour
         foreach (Item item in startingItems) { items.Add(item); }
         #endregion Filling out Items
 
-        DontDestroyOnLoad(gameObject);
         rb2D = GetComponent<Rigidbody2D>();
         velocity = Vector2.zero;
     }
@@ -277,7 +280,8 @@ public class Player : MonoBehaviour
 
     protected virtual void Die()
     {
-        
+        if (anim != null) anim.SetBool("isDead", true);
+        enabled = false;
     }
 
     public virtual void Blink()
@@ -319,12 +323,19 @@ public class Player : MonoBehaviour
 
         velocity = frameVel * moveSpeed;
 
+        //play the walking animation if the player is moving
+        if(anim != null)
+        {
+            if (velocity.sqrMagnitude > 0) anim.SetBool("isWalking", true);
+            else anim.SetBool("isWalkiing", false);
+        }
+
         //Smoothes the player when they stop moving so it's not so jerky
         if ((lastVelocity.sqrMagnitude > velocity.sqrMagnitude) && lastVelocity.sqrMagnitude > 0.5)
         {
             velocity = (lastVelocity * slowMult);
         }
-        //do stuff with last velocity mayhaps?
+
         lastVelocity = velocity;
     }
 
