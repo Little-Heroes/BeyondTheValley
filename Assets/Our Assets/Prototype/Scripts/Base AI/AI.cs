@@ -24,6 +24,7 @@ public class AI : MonoBehaviour {
     public Teams currentTeam;
     public bool possessed = false;
     public bool isStunned = false;
+    public float resistance = 2.0f;
 
     [Header("Attack Variables")]
     public int basicAttackDamage;
