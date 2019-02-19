@@ -23,7 +23,7 @@ public class DamagableObjects : MonoBehaviour {
     [Range(0,1)]
     public float spawnChance = 0.05f;
 
-    [Tooltip("used for the spawn x type, DO NOT MAKE LARGER THAN LIST SIZE")]
+    [Tooltip("used for the spawn x type")]
     public int x;
 
     [SerializeField]
@@ -35,7 +35,7 @@ public class DamagableObjects : MonoBehaviour {
         if (proj != null)
         {
             health -= proj.damageAmount;
-            if(health <= 0) { DoDead(); }
+            if(health <= 0)  DoDead();
         }
     }
 
