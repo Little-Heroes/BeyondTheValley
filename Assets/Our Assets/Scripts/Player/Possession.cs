@@ -84,13 +84,13 @@ public class Possession : Player {
     {
         if(possessionTimer < Time.time)
         {
-            UnPossess();
+            Expunge();
             return;
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             StunRing();
-            UnPossess();
+            Expunge();
             return;
         }
         base.Update();
@@ -98,7 +98,7 @@ public class Possession : Player {
 
     protected override void Die()
     {
-        UnPossess();
+        Expunge();
     }
 
     public void OnKill(string enemyType, float possessTimePlus)
@@ -117,7 +117,7 @@ public class Possession : Player {
         //knock back those just outside the radius
     }
 
-    private void UnPossess()
+    private void Expunge()
     {
         //possessed.animator.SetBool("UnPossess", true);
         possesser.enabled = true;

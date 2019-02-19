@@ -310,9 +310,10 @@ public class Player : MonoBehaviour
     }
     #endregion damage handling
 
-    private void Possess()
+    private void Possess(AI _ai)
     {
-
+        _ai.gameObject.AddComponent<Possession>();
+        enabled = false;
     }
 
     protected void UpdateMovement()
@@ -472,15 +473,8 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            Possess();
-        }
-        else
-        {
-            UpdateMovement();
-            UpdateAttacking();
-        }
+        UpdateMovement();
+        UpdateAttacking();
         InvincibilityChecks();
     }
 
@@ -488,5 +482,38 @@ public class Player : MonoBehaviour
     {
         //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
         rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
+    }
+
+    private void OnTriggerStay2D(Collider2D c)
+    {
+        AI ai = c.GetComponent<AI>();
+        if (ai == null) { return; }
+
+        if (/*ai.isStunned*/true)
+        {
+            //button mashing
+            if (PlayerPrefs.GetInt("QTE Stlye") == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyUp(KeyCode.Space))
+                {
+                    //if (ai.resistance <= 0) { Possess(ai); }
+                    //else { ai.resistance -= Time.deltaTime; }
+                }
+            }
+            //button holding
+            else if (PlayerPrefs.GetInt("QTE Stlye") == 2)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    //if (ai.resistance <= 0) { Possess(ai); }
+                    //else { ai.resistance -= Time.deltaTime; }
+                }
+            }
+            else //no button involvement
+            {
+                //if (ai.resistance <= 0) { Possess(ai); }
+                //else { ai.resistance -= Time.deltaTime; }
+            }
+        }
     }
 }
