@@ -43,7 +43,7 @@ public class TempProjectile : MonoBehaviour {
                 collGO.GetComponent<Player>().TakeDamage((int)damageAmount);
                 break;
             case "Ranged":
-                collGO.GetComponent<Ranged>().TakeDamage(damageAmount);
+                collGO.GetComponent<AI>().TakeDamage(damageAmount);
                 break;
             case "Charge":
                 collGO.GetComponent<Charge>().TakeDamage(damageAmount);
