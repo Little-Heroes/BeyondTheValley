@@ -39,7 +39,7 @@ public class Possession : Player {
         //Based on inputs attack in the intended direction
         if (isAttacking && attackTimer <= Time.time && (!Input.GetKey(KeyCode.Space)))
         {
-            possessed.PlayerBasicAttack(attackDir);
+            //possessed.PlayerBasicAttack(attackDir);
         }
 
         else if (Input.GetKey(KeyCode.Space))
@@ -61,7 +61,7 @@ public class Possession : Player {
         }
         else if (isCharged && (releasedKey || (wasAttacking && !isAttacking)))
         {
-            possessed.PlayerChargedAttack(attackDir);
+            //possessed.PlayerChargedAttack(attackDir);
             chargeBar.color = Color.white;
             isCharged = false;
             chargedAttackTimer = 0;
@@ -82,14 +82,18 @@ public class Possession : Player {
 
     protected override void Update()
     {
-        if(possessionTimer < Time.time || Input.GetKeyDown(KeyCode.LeftShift))
+        if(possessionTimer < Time.time)
         {
             UnPossess();
             return;
         }
-        UpdateMovement();
-        UpdateAttacking();
-        InvincibilityChecks();
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            StunRing();
+            UnPossess();
+            return;
+        }
+        base.Update();
     }
 
     protected override void Die()
@@ -106,8 +110,16 @@ public class Possession : Player {
         possessionTimer += possessTimePlus;
     }
 
+    private void StunRing()
+    {
+        //do the particle display
+        //stun all in the radius
+        //knock back those just outside the radius
+    }
+
     private void UnPossess()
     {
+        //possessed.animator.SetBool("UnPossess", true);
         possesser.enabled = true;
         Destroy(this);
     }

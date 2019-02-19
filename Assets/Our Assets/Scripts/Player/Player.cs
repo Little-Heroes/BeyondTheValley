@@ -6,6 +6,16 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    [Header("Testing")]
+    public bool die = false;
+
+    public bool takeDamage = false;
+
+
+    [Header("GIVE")]
+    public Animator anim;
+
+
     #region stats
     //-----------------------
     //The set up for the player
@@ -22,6 +32,9 @@ public class Player : MonoBehaviour
 
     [Range(0, 1)]
     public int baseCanFly;
+
+    [Range(0, 1)]
+    public float slowMult = 0.8f;
 
     [Header("Projectiles")]
     public int baseDamage;
@@ -50,6 +63,9 @@ public class Player : MonoBehaviour
     public float baseChargeTime;
 
     public TempProjectile baseChargedProjectile;
+
+    public Image chargeBar;
+
     #endregion player set up in editor
 
     //-----------------------
@@ -155,12 +171,7 @@ public class Player : MonoBehaviour
     public Joystick movementControl;
 
     public bool stickAcceleration = true;
-
-    [Range(0, 1)]
-    public float slowMult = 0.8f;
-
-    public Animator anim;
-
+    
     private Rigidbody2D rb2D;
 
     private Vector2 velocity;
@@ -188,13 +199,12 @@ public class Player : MonoBehaviour
 
     protected bool isCharging = false;
 
-    public Image chargeBar;
-
     protected Vector2 lastAttackDir = Vector2.zero;
 
     #endregion Attacking
 
     #region possession
+    [Header("Possession")]
     public float possessionTime;
     #endregion possession
 
@@ -271,6 +281,7 @@ public class Player : MonoBehaviour
     #region damage handling
     public virtual void TakeDamage(int _damage)
     {
+        takeDamage = false;
         if (invincible) return;
         health -= _damage;
         invincible = true;
@@ -279,6 +290,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Die()
     {
+        die = false;
         if (anim != null) anim.SetBool("isDead", true);
         enabled = false;
     }
@@ -438,6 +450,7 @@ public class Player : MonoBehaviour
 
     protected void InvincibilityChecks()
     {
+        //for testing
         if (invincible)
         {
             Blink();
@@ -453,6 +466,8 @@ public class Player : MonoBehaviour
                 }
             }
         }
+        else if (takeDamage) TakeDamage(1);
+        else if (die) Die();
     }
 
     protected virtual void Update()
