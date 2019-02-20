@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
 
     public float possessionTime = 10f;
 
-    private int QTEType = 1;
+    public int QTEType = 1;
     #endregion possession
 
     #region ivincibility
@@ -511,9 +511,8 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyUp(KeyCode.Space))
                 {
-                    Possess(ai);
-                    //if (ai.resistance <= 0) { Possess(ai); }
-                    //else { ai.resistance -= Time.deltaTime * possessStrength; }
+                    if (ai.resistance <= 0) { Possess(ai); }
+                    else { ai.resistance -= Time.deltaTime * possessStrength; }
                 }
             }
             //button holding
@@ -521,9 +520,8 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    Possess(ai);
-                    //if (ai.resistance <= 0) { Possess(ai); }
-                    //else { ai.resistance -= Time.deltaTime * possessStrength; }
+                    if (ai.resistance <= 0) { Possess(ai); }
+                    else { ai.resistance -= Time.deltaTime * possessStrength; }
                 }
             }
             else //no button involvement

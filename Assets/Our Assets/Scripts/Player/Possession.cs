@@ -169,6 +169,7 @@ public class Possession : Player {
             }
         }
         possesser.transform.position = transform.position;
+        possessed.resistance = possessed.maxResistance;
         possessed.currentHealth = 0;
         Destroy(this);
     }

@@ -29,9 +29,10 @@ public class AI : MonoBehaviour
     public bool isStunned = false;
     public float maxResistance = 2.0f;
     public float stunLimit = 10f;
-    private float resistance = 2.0f;
-    private float amountStunned = 0f;
+    public float resistance = 2.0f;
+    public float amountStunned = 0f;
     private float lastResist = 0f;
+    public Image resistBar;
     public Image stunBar;
     public Collider2D hitbox;
 
@@ -64,16 +65,34 @@ public class AI : MonoBehaviour
     {
         if (stunBar != null)
         {
-            if (amountStunned == 0) { stunBar.fillAmount = 0; }
-            else {
-                stunBar.fillAmount = amountStunned / stunLimit; }
+            if (amountStunned <= 0) { stunBar.fillAmount = 0; }
+            else { stunBar.fillAmount = amountStunned / stunLimit; }
+        }
+        if (resistBar != null)
+        {
+            if (resistance >= maxResistance) { resistBar.fillAmount = 1; }
+            else { resistBar.fillAmount = resistance / maxResistance; }
         }
         //the stun cools down slowly overtime unless resistance is falling to the player
-        if (lastResist < resistance) { amountStunned -= Time.deltaTime / 2; }
+        if ( resistance >= maxResistance )
+        {
+            amountStunned -= Time.deltaTime / 2;
+        }
         //if stunned and the amount stunned is less than or equal 0 stopped being stunned
-        if( isStunned ) { if (amountStunned <= 0) { isStunned = false;} }
+        if( isStunned )
+        {
+            if (amountStunned <= 0)
+            {
+                isStunned = false;
+            }
+        }
         //if the resistance is less than the max, increase it back to the max
-        if( resistance < maxResistance ) { resistance += Time.deltaTime / 2; Mathf.Clamp(resistance, 0, maxResistance); }
+        if( resistance < maxResistance )
+        {
+            resistance += Time.deltaTime / 2;
+            resistance = Mathf.Clamp(resistance, 0, maxResistance);
+        }
+        amountStunned = Mathf.Clamp(amountStunned, 0, stunLimit);
         lastResist = resistance;
     }
 

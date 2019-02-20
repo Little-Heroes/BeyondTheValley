@@ -149,10 +149,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4479466211335272}
+  - component: {fileID: 114492658636659530}
   - component: {fileID: 50899805904994120}
   - component: {fileID: 95206885571338148}
   - component: {fileID: 70633769178265392}
-  - component: {fileID: 114492658636659530}
   m_Layer: 8
   m_Name: Tom
   m_TagString: Player
@@ -264,7 +264,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1709280434422824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6352572, y: -18.39835, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4602586652346818}
@@ -335,7 +335,7 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!70 &70633769178265392
@@ -350,9 +350,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009889087, y: -4.3385444}
-  m_Size: {x: 5.6598954, y: 2.4609416}
-  m_Direction: 1
+  m_Offset: {x: 0.19970608, y: -0.47322655}
+  m_Size: {x: 6.3608236, y: 10.191646}
+  m_Direction: 0
 --- !u!95 &95206885571338148
 Animator:
   serializedVersion: 3
@@ -403,11 +403,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6858be77b9cac94ea5fdc7e2cf6b5ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  die: 0
+  takeDamage: 0
+  anim: {fileID: 0}
   baseMaxHealth: 1
   baseHealth: 1
   baseMoveSpeed: 20
   baseCanFly: 0
-  baseDamage: 1
+  slowMult: 0.8
+  baseStunAmount: 6
   baseFastestSecondsPerShot: 0.15
   baseSecondsPerShot: 0.35
   baseProjectileSpeed: 24
@@ -422,18 +426,19 @@ MonoBehaviour:
   baseChargeTime: 2
   baseChargedProjectile: {fileID: 114002163593251030, guid: 5ec6cbb802aaf6949b1ac2c484a0b15b,
     type: 2}
+  chargeBar: {fileID: 114634992022718076}
   startingItems: []
   heldItem: {fileID: 0}
   items: []
   movementControl: {fileID: 0}
   stickAcceleration: 1
-  slowMult: 0.8
   shootingControl: {fileID: 0}
   smoothedShooting: 1
-  chargedShotButton: {fileID: 0}
-  chargeBar: {fileID: 114634992022718076}
+  chargedAttackButton: {fileID: 0}
+  possessStrength: 30
+  possessionTime: 10
+  QTEType: 1
   invincibleTimeAmount: 0
-  takeDamage: 0
   timeBetweenBlinks: 0
 --- !u!114 &114634992022718076
 MonoBehaviour:
