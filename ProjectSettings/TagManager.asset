@@ -27,15 +27,15 @@ TagManager:
   - 
   - Player
   - PlayerProjectile
-  - OrcKing
-  - OrcKingProjectile
-  - Charge
-  - Range
-  - Melee
-  - RangedEnemyProjectile
+  - Enemy
+  - EnemyProjectile
   - Boss
   - BossProjectile
   - NotCollideWithPlayer
+  - Walls
+  - 
+  - 
+  - 
   - 
   - 
   - 

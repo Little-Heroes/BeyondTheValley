@@ -8,6 +8,8 @@ public class DashAI : AI
     public float dashSpeed;
     public Vector3 dashPoint;
     public bool isCharging;
+    public AnimationCurve animCurve;
+    public float timeElapsed = 0.0f;
 
     public Vector3 beginPos;
 
@@ -19,20 +21,26 @@ public class DashAI : AI
 
     public override void BasicAttack()
     {
-        if (abilityOneTimer > 0)
+        if (basicAttackTimer > 0)
         {
-            abilityOneTimer -= Time.deltaTime;
+            basicAttackTimer -= Time.deltaTime;
         }
         else
         {
             if (isCharging)
             {
-                MoveTowards(dashPoint, movementSpeed);
+                float distanceTravelled = Vector3.Distance(beginPos, rb2D.position);
+                float startToEnd = Vector3.Distance(beginPos, dashPoint);
+                float distance = distanceTravelled / startToEnd;
+                dashSpeed = animCurve.Evaluate(distance) * movementSpeed;
+                Debug.Log(distance);
+                MoveTowards(dashPoint, dashSpeed);
 
                 if (Vector3.Distance(rb2D.position, dashPoint) < 1.0f)
                 {
                     isCharging = false;
-                    abilityOneTimer = abilityOneCooldown;
+                    basicAttackTimer = basicAttackCooldown;
+                    dashSpeed = 0.0f;
                 }
             }
             else
