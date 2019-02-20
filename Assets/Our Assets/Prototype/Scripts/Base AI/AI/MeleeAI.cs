@@ -21,10 +21,12 @@ public class MeleeAI : AI
 
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        if (isStunned)
+            return;
         Movement();
-
+        base.Update();
     }
 
     private void OnCollisionStay2D(Collision2D collision)

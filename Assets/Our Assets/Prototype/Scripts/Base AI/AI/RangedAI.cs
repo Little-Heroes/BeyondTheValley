@@ -14,6 +14,8 @@ public class RangedAI : AI {
 	// Update is called once per frame
 	protected override void Update ()
     {
+        if (isStunned)
+            return;
         Movement();
         base.Update();
     }

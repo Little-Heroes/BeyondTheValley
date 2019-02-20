@@ -14,9 +14,12 @@ public class DashAI : AI
     public Vector3 beginPos;
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        if (isStunned)
+            return;
         BasicAttack();
+        base.Update();
     }
 
     public override void BasicAttack()
