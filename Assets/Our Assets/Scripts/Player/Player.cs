@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
     public bool takeDamage = false;
 
+    public bool canMove = true;
+
     [Header("GIVE")]
     public Animator anim;
     
@@ -482,15 +484,21 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
-        UpdateMovement();
+        if (canMove)
+        {
+            UpdateMovement();
+        }
         UpdateAttacking();
         InvincibilityChecks();
     }
 
     protected virtual void FixedUpdate()
     {
-        //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-        rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
+        if (canMove)
+        {
+            //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+            rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
+        }
     }
     #endregion Update Methods
     //All things that can get changed in settings should go in here

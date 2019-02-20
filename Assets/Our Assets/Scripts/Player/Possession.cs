@@ -21,6 +21,7 @@ public class Possession : Player {
         possessionTimer = Time.time + possesser.possessionTime;
         rb2D = GetComponent<Rigidbody2D>();
         velocity = Vector2.zero;
+        gameObject.layer = LayerMask.NameToLayer("Player");
 
         //setting up variables
         MoveSpeed = possessed.movementSpeed;
@@ -179,6 +180,7 @@ public class Possession : Player {
         possesser.transform.position = transform.position;
         possessed.resistance = possessed.maxResistance;
         possessed.Die();
+        canMove = true;
         Destroy(this);
     }
 }
