@@ -10,6 +10,7 @@ public class DashAI : AI
     public bool isCharging;
     public AnimationCurve animCurve;
     public float timeElapsed = 0.0f;
+    public float playerDashAmount;
 
     public Vector3 beginPos;
 
@@ -50,6 +51,39 @@ public class DashAI : AI
             {
                 beginPos = rb2D.position;
                 dashPoint = playerReference.transform.position;
+                isCharging = true;
+            }
+        }
+    }
+
+    public override void PlayerBasicAttack(Vector3 direction)
+    {
+        if (basicAttackTimer > 0)
+        {
+            basicAttackTimer -= Time.deltaTime;
+        }
+        else
+        {
+            if (isCharging)
+            {
+                float distanceTravelled = Vector3.Distance(beginPos, rb2D.position);
+                float startToEnd = Vector3.Distance(beginPos, dashPoint);
+                float distance = distanceTravelled / startToEnd;
+                dashSpeed = animCurve.Evaluate(distance) * movementSpeed;
+                Debug.Log(distance);
+                MoveTowards(dashPoint, dashSpeed);
+
+                if (Vector3.Distance(rb2D.position, dashPoint) < 1.0f)
+                {
+                    isCharging = false;
+                    basicAttackTimer = basicAttackCooldown;
+                    dashSpeed = 0.0f;
+                }
+            }
+            else
+            {
+                beginPos = rb2D.position;
+                dashPoint = rb2D.position + (Vector2)direction * playerDashAmount;
                 isCharging = true;
             }
         }
