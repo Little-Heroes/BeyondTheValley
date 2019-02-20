@@ -396,7 +396,7 @@ public class Player : MonoBehaviour
         isCharging = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
 
         //Based on inputs shoot a projectile in the intended direction
-        if (isAttacking && attackTimer <= Time.time && !!isCharging)
+        if (isAttacking && attackTimer <= Time.time && !isCharging)
         {
             if (projectile != null)
             {
@@ -504,7 +504,7 @@ public class Player : MonoBehaviour
         AI ai = c.GetComponent<AI>();
         if (ai == null) { return; }
 
-        if (/*ai.isStunned*/true)
+        if (ai.isStunned)
         {
             //button mashing
             if (QTEType == 1)

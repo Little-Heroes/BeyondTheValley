@@ -60,12 +60,13 @@ public class AI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         if (stunBar != null)
         {
             if (amountStunned == 0) { stunBar.fillAmount = 0; }
-            else { stunBar.fillAmount = amountStunned / stunLimit; }
+            else {
+                stunBar.fillAmount = amountStunned / stunLimit; }
         }
         //the stun cools down slowly overtime unless resistance is falling to the player
         if (lastResist < resistance) { amountStunned -= Time.deltaTime / 2; }

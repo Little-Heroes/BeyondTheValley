@@ -38,13 +38,13 @@ public class TempProjectile : MonoBehaviour {
                 collGO.GetComponent<OrcBoi>().TakeDamage(damageAmount);
                 break;
             case "Orc King":
-                collGO.GetComponent<OrcKing>().TakeDamage(damageAmount, this.gameObject);
+                collGO.GetComponent<OrcKing>().TakeDamage(damageAmount, gameObject);
                 break;
             case "Player":
-                collGO.GetComponent<Player>().TakeDamage((int)damageAmount);
+                collGO.GetComponent<Player>().TakeDamage(damageAmount);
                 break;
             case "Ranged":
-                collGO.GetComponent<AI>().TakeDamage(damageAmount);
+                collGO.GetComponent<AI>().TakeDamage(damageAmount, stun);
                 break;
             case "Charge":
                 collGO.GetComponent<Charge>().TakeDamage(damageAmount);
@@ -53,5 +53,13 @@ public class TempProjectile : MonoBehaviour {
                 collGO.GetComponent<FreeRoam>().TakeDamage(damageAmount);
                 break;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D c)
+    {
+        Destroy(gameObject);
+        AI enemy = c.GetComponent<AI>();
+        if (enemy == null) { return; }
+        enemy.TakeDamage(damageAmount, stun);
     }
 }
