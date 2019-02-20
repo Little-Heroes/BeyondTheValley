@@ -170,6 +170,11 @@ public class AI : MonoBehaviour
 
     }
 
+    public virtual void OnPossession()
+    {
+
+    }
+
     public virtual void MoveTowards(Vector2 target, float movementSpeed)
     {
         Vector2 direction = target - rb2D.position;

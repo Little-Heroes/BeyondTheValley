@@ -5,6 +5,7 @@ using UnityEngine;
 public class DashAI : AI
 {
     [Header("Dash Values")]
+    public float maxDashSpeed;
     public float dashSpeed;
     public Vector3 dashPoint;
     public bool isCharging;
@@ -36,7 +37,7 @@ public class DashAI : AI
                 float distanceTravelled = Vector3.Distance(beginPos, rb2D.position);
                 float startToEnd = Vector3.Distance(beginPos, dashPoint);
                 float distance = distanceTravelled / startToEnd;
-                dashSpeed = animCurve.Evaluate(distance) * movementSpeed;
+                dashSpeed = animCurve.Evaluate(distance) * maxDashSpeed;
                 Debug.Log(distance);
                 MoveTowards(dashPoint, dashSpeed);
 
@@ -66,15 +67,20 @@ public class DashAI : AI
         {
             if (isCharging)
             {
+                //todo: disable player movement
+                playerReference.GetComponent<Player>().canMove = false;
+
                 float distanceTravelled = Vector3.Distance(beginPos, rb2D.position);
                 float startToEnd = Vector3.Distance(beginPos, dashPoint);
                 float distance = distanceTravelled / startToEnd;
-                dashSpeed = animCurve.Evaluate(distance) * movementSpeed;
+                dashSpeed = animCurve.Evaluate(distance) * maxDashSpeed;
                 Debug.Log(distance);
                 MoveTowards(dashPoint, dashSpeed);
 
                 if (Vector3.Distance(rb2D.position, dashPoint) < 1.0f)
                 {
+                    //todo: re-enable player movement
+                    playerReference.GetComponent<Player>().canMove = true;
                     isCharging = false;
                     basicAttackTimer = basicAttackCooldown;
                     dashSpeed = 0.0f;
@@ -92,5 +98,11 @@ public class DashAI : AI
     public override void PlayerAbilityOne(Vector3 direction)
     {
         base.PlayerAbilityOne(direction);
+    }
+
+    public override void OnPossession()
+    {
+        isCharging = false;
+        base.OnPossession();
     }
 }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Possession : Player {
+public class Possession : Player
+{
 
     public Player possesser;
     public AI possessed;
@@ -37,8 +38,13 @@ public class Possession : Player {
         possesser.enabled = false;
 
         //disabling the ai
-        lifeTime = possessed.resistBar;
-        possessed.stunBar.fillAmount = 0;
+        if (lifeTime)
+            lifeTime = possessed.resistBar;
+        if (possessed.stunBar)
+        {
+            possessed.stunBar.fillAmount = 0;
+
+        }
         possessed.enabled = false;
     }
 
@@ -119,7 +125,7 @@ public class Possession : Player {
 
     protected override void Update()
     {
-        if(possessionTimer < Time.time)
+        if (possessionTimer < Time.time)
         {
             Expunge();
             return;
@@ -132,7 +138,8 @@ public class Possession : Player {
         }
         else
         {
-            lifeTime.fillAmount = (possessionTimer - Time.time) / possessionTime;
+            if (lifeTime)
+                lifeTime.fillAmount = (possessionTimer - Time.time) / possessionTime;
         }
         base.Update();
     }
@@ -144,7 +151,7 @@ public class Possession : Player {
 
     public void OnKill(string enemyType, float possessTimePlus)
     {
-        if(/*possessed.AIType == enemyType*/false)
+        if (/*possessed.AIType == enemyType*/false)
         {
             possessionTimer += possessTimePlus * 2;
         }
@@ -170,7 +177,8 @@ public class Possession : Player {
             {
                 c.enabled = true;
             }
-        } {
+        }
+        {
             Renderer[] things = possesser.GetComponentsInChildren<Renderer>();
             foreach (Renderer r in things)
             {
