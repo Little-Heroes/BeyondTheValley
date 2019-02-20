@@ -509,7 +509,7 @@ public class Player : MonoBehaviour
             //button mashing
             if (QTEType == 1)
             {
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyUp(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (ai.resistance <= 0) { Possess(ai); }
                     else { ai.resistance -= Time.deltaTime * possessStrength; }

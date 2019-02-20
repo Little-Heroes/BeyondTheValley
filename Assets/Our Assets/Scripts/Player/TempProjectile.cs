@@ -32,6 +32,11 @@ public class TempProjectile : MonoBehaviour {
     {
         Destroy(gameObject);
         GameObject collGO = collision.gameObject;
+        DamagableObjects DO = collGO.GetComponent<DamagableObjects>();
+        if(DO != null)
+        {
+            DO.takeHit(this);
+        }
         switch (collGO.tag)
         {
             case "Orc":

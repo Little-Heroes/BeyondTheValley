@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Possession : Player {
 
     public Player possesser;
     public AI possessed;
+    private Image lifeTime;
 
     float possessionTimer = 0f;
 
@@ -32,8 +34,10 @@ public class Possession : Player {
         Renderer[] things = possesser.GetComponentsInChildren<Renderer>();
         foreach (Renderer r in things) { r.enabled = false; }
         possesser.enabled = false;
-        
+
         //disabling the ai
+        lifeTime = possessed.resistBar;
+        possessed.stunBar.fillAmount = 0;
         possessed.enabled = false;
     }
 
@@ -119,11 +123,15 @@ public class Possession : Player {
             Expunge();
             return;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             StunRing();
             Expunge();
             return;
+        }
+        else
+        {
+            lifeTime.fillAmount = (possessionTimer - Time.time) / possessionTime;
         }
         base.Update();
     }
@@ -170,7 +178,7 @@ public class Possession : Player {
         }
         possesser.transform.position = transform.position;
         possessed.resistance = possessed.maxResistance;
-        possessed.currentHealth = 0;
+        possessed.Die();
         Destroy(this);
     }
 }

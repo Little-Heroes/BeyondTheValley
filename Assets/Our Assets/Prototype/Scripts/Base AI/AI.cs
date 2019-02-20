@@ -90,7 +90,10 @@ public class AI : MonoBehaviour
         if( resistance < maxResistance )
         {
             resistance += Time.deltaTime / 2;
-            resistance = Mathf.Clamp(resistance, 0, maxResistance);
+            if (resistance > maxResistance)
+            {
+                resistance = maxResistance;
+            }
         }
         amountStunned = Mathf.Clamp(amountStunned, 0, stunLimit);
         lastResist = resistance;

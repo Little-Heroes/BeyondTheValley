@@ -16,7 +16,12 @@ public class DamagableObjects : MonoBehaviour {
     [Range(0, 100)]
     public int health = 1;
 
+    public GameObject hitParticles;
+
     public GameObject destroyParticles;
+
+    [Tooltip("The game object that will be in this ones spot when it is destroyed eg burnt out fire replacing a fire")]
+    public GameObject replacement;
 
     public List<GameObject> spawnAbles;
 
@@ -29,13 +34,18 @@ public class DamagableObjects : MonoBehaviour {
     [SerializeField]
     private SpawnType spawnType;
 
-    private void OnCollisionEnter(Collision c)
+    public void takeHit(TempProjectile p)
     {
-        TempProjectile proj = c.gameObject.GetComponent<TempProjectile>();
-        if (proj != null)
+        if (p != null)
         {
-            health -= proj.damageAmount;
+            health -= p.damageAmount;
             if(health <= 0)  DoDead();
+            else if (hitParticles != null)
+            {
+                GameObject go = 
+                    Instantiate(hitParticles, transform.position, Quaternion.identity);
+                Destroy(go, 3);
+            }
         }
     }
 
@@ -76,6 +86,7 @@ public class DamagableObjects : MonoBehaviour {
                 Instantiate(spawnAbles[rand], transform.position, Quaternion.identity);
             }
         }
+        if (replacement != null) Instantiate(replacement, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
