@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AI : MonoBehaviour
 {
@@ -23,9 +24,15 @@ public class AI : MonoBehaviour
     public Rigidbody2D rb2D;
     public Teams startingTeam;
     public Teams currentTeam;
+    //possession stuff
     public bool possessed = false;
     public bool isStunned = false;
-    public float resistance = 2.0f;
+    public float maxResistance = 2.0f;
+    public float stunLimit = 10f;
+    private float resistance = 2.0f;
+    private float amountStunned = 0f;
+    private float lastResist = 0f;
+    public Image stunBar;
     public Collider2D hitbox;
 
     [Header("Attack Variables")]
@@ -55,7 +62,18 @@ public class AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (stunBar != null)
+        {
+            if (amountStunned == 0) { stunBar.fillAmount = 0; }
+            else { stunBar.fillAmount = amountStunned / stunLimit; }
+        }
+        //the stun cools down slowly overtime unless resistance is falling to the player
+        if (lastResist < resistance) { amountStunned -= Time.deltaTime / 2; }
+        //if stunned and the amount stunned is less than or equal 0 stopped being stunned
+        if( isStunned ) { if (amountStunned <= 0) { isStunned = false;} }
+        //if the resistance is less than the max, increase it back to the max
+        if( resistance < maxResistance ) { resistance += Time.deltaTime / 2; Mathf.Clamp(resistance, 0, maxResistance); }
+        lastResist = resistance;
     }
 
     public virtual void DealContactDamage(Player player)
@@ -70,6 +88,16 @@ public class AI : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public virtual void TakeDamage(int amount, bool stun)
+    {
+        if (stun)
+        {
+            amountStunned += amount;
+            if(amountStunned >= stunLimit) { isStunned = true; }
+        }
+        else { TakeDamage(amount); }
     }
 
     public virtual void Die()

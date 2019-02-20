@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
 
     [Header("GIVE")]
     public Animator anim;
-
+    
     #region stats
     //-----------------------
     //The set up for the player
@@ -320,6 +320,7 @@ public class Player : MonoBehaviour
         poss.enabled = true;
     }
 
+    #region Update Methods
     protected void UpdateMovement()
     {
         Vector2 frameVel = Vector2.zero;
@@ -491,7 +492,7 @@ public class Player : MonoBehaviour
         //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
         rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
     }
-
+    #endregion Update Methods
     //All things that can get changed in settings should go in here
     public void UpdateSettings()
     {
