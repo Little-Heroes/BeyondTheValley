@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI : MonoBehaviour {
+public class AI : MonoBehaviour
+{
     public enum Teams
     {
         Player,
-        Enemy, 
-        Party, 
+        Enemy,
+        Party,
         EnemySquared,
     }
 
@@ -25,6 +26,7 @@ public class AI : MonoBehaviour {
     public bool possessed = false;
     public bool isStunned = false;
     public float resistance = 2.0f;
+    public Collider2D hitbox;
 
     [Header("Attack Variables")]
     public int basicAttackDamage;
@@ -37,21 +39,25 @@ public class AI : MonoBehaviour {
     public float abilityOneCooldown;
     public float abilityOneTimer;
 
+    [Header("debug stuff")]
+    public Vector3 gizmoPoint;
+
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+        hitbox = GetComponent<Collider2D>();
         currentHealth = maxHealth;
         playerReference = GameObject.FindGameObjectWithTag("Player");
         rb2D = GetComponent<Rigidbody2D>();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-        
-	}
-    
+
+    }
+
     public virtual void DealContactDamage(Player player)
     {
         player.TakeDamage(contactDamage);
@@ -60,7 +66,7 @@ public class AI : MonoBehaviour {
     public virtual void TakeDamage(int amount)
     {
         currentHealth -= amount;
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -81,7 +87,7 @@ public class AI : MonoBehaviour {
 
     public virtual void BasicAttack()
     {
-        if(basicAttackTimer > 0)
+        if (basicAttackTimer > 0)
         {
             basicAttackTimer -= Time.deltaTime;
         }
@@ -116,6 +122,21 @@ public class AI : MonoBehaviour {
     public virtual void MoveTowards(Vector2 target, float movementSpeed)
     {
         Vector2 direction = target - rb2D.position;
-        rb2D.MovePosition(rb2D.position + direction.normalized * movementSpeed * Time.deltaTime);
+        //RaycastHit2D hit = Physics2D.Raycast(rb2D.position, direction.normalized, movementSpeed, LayerMask.NameToLayer("Walls"));
+        //if (hit)
+        //{
+        //    gizmoPoint = hit.point;
+        //    rb2D.MovePosition(rb2D.position + direction.normalized * (hitbox.bounds.SqrDistance(hit.point) / 2) * Time.deltaTime);
+        //}
+        //else
+        {
+            rb2D.MovePosition(rb2D.position + direction.normalized * movementSpeed * Time.deltaTime);
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(gizmoPoint, 0.5f);
     }
 }

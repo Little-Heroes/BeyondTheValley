@@ -16,6 +16,7 @@ public class MeleeAI : AI
     public float timeBetweenMovementsTimer;
     public float movementDistance;
     public GameObject meleeGameObject;
+    public LayerMask walls;
 
 
 
@@ -28,7 +29,7 @@ public class MeleeAI : AI
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             BasicAttack();
         }
@@ -47,7 +48,7 @@ public class MeleeAI : AI
             if (pl)
             {
                 pl.TakeDamage(basicAttackDamage);
-                basicAttackTimer = basicAttackCooldown; 
+                basicAttackTimer = basicAttackCooldown;
             }
         }
     }
@@ -64,7 +65,7 @@ public class MeleeAI : AI
             GameObject go = Instantiate(meleeGameObject, transform.position, Quaternion.identity);
             float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             go.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotZ - 90);
-            
+
             basicAttackTimer = basicAttackCooldown;
         }
     }
@@ -89,6 +90,7 @@ public class MeleeAI : AI
 
                 if (Vector3.Distance(transform.position, targetPosition) < 1.0f)
                 {
+                    Debug.Log("reached Pos");
                     isCharging = false;
                     previousRand = targetPosition;
                     timeBetweenMovementsTimer = timeBetweenMovements;
@@ -103,7 +105,17 @@ public class MeleeAI : AI
                 else
                 {
                     Vector3 randomVector = Random.insideUnitCircle.normalized;
-                    targetPosition = transform.position + randomVector * movementDistance;
+
+                    RaycastHit2D hit = Physics2D.Raycast(rb2D.position, randomVector.normalized, movementDistance, walls);
+                    Debug.DrawRay(rb2D.position, randomVector.normalized * movementDistance);
+                    if (hit.collider != null)
+                    {
+                        targetPosition = hit.point - (Vector2)randomVector.normalized * (hitbox.bounds.extents.x / 2);
+                    }
+                    else
+                    {
+                        targetPosition = transform.position + randomVector.normalized * movementDistance;
+                    }
                     isCharging = true;
                 }
             }
@@ -112,5 +124,10 @@ public class MeleeAI : AI
         {
             MoveTowards(playerReference.transform.position, movementSpeed);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(targetPosition, 0.5f);
     }
 }

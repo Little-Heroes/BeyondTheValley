@@ -141,6 +141,7 @@ MonoBehaviour:
   currentTeam: 0
   possessed: 0
   isStunned: 0
+  resistance: 2
   basicAttackDamage: 1
   basicAttackCooldown: 0.5
   basicAttackTimer: 0
@@ -187,6 +188,7 @@ MonoBehaviour:
   currentTeam: 1
   possessed: 0
   isStunned: 0
+  resistance: 2
   basicAttackDamage: 1
   basicAttackCooldown: 0.75
   basicAttackTimer: 0
@@ -291,6 +293,107 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &643093051
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -31.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 12.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4171711003534346, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961677460830892, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961677460830892, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+      propertyPath: m_Name
+      value: LittleForestChomper (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 50187338065309960, guid: d59869b6d1908c5409b6e60c2af2a801,
+        type: 2}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50187338065309960, guid: d59869b6d1908c5409b6e60c2af2a801,
+        type: 2}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114232809183833804, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: d59869b6d1908c5409b6e60c2af2a801, type: 2}
+  m_IsPrefabAsset: 0
+--- !u!1 &798648650 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1961677460830892, guid: d59869b6d1908c5409b6e60c2af2a801,
+    type: 2}
+  m_PrefabInternal: {fileID: 643093051}
+--- !u!114 &798648651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 798648650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739e28308e9d52a47911a6568e389991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AItype: Dash
+  bonusPossessionTime: 1
+  maxHealth: 3
+  currentHealth: 3
+  movementSpeed: 20
+  isAwake: 0
+  playerReference: {fileID: 0}
+  rb2D: {fileID: 0}
+  startingTeam: 0
+  currentTeam: 0
+  possessed: 0
+  isStunned: 0
+  resistance: 2
+  basicAttackDamage: 1
+  basicAttackCooldown: 1
+  basicAttackTimer: 0
+  contactDamage: 0
+  abilityOneDamage: 0
+  abilityOneCooldown: 0
+  abilityOneTimer: 0
+  dashSpeed: 0
+  dashPoint: {x: 0, y: 0, z: 0}
+  isCharging: 0
+  beginPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &961085338
 Prefab:
   m_ObjectHideFlags: 0
@@ -392,7 +495,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1894380693957928, guid: 3f9654fd77790354098d1081837e5b7b, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114473779471639514, guid: 3f9654fd77790354098d1081837e5b7b, type: 2}
@@ -448,7 +551,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1922100121025690, guid: be1fb72996881ee4f9233833cbe6d27f, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 50031256020367860, guid: be1fb72996881ee4f9233833cbe6d27f,
         type: 2}
