@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 35
-  damageAmount: 1
+  damageAmount: 0
   lifeTime: 2
 --- !u!212 &212437926026846892
 SpriteRenderer:

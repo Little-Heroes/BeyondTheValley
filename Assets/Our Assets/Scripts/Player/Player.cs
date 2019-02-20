@@ -11,10 +11,8 @@ public class Player : MonoBehaviour
 
     public bool takeDamage = false;
 
-
     [Header("GIVE")]
     public Animator anim;
-
 
     #region stats
     //-----------------------
@@ -23,44 +21,44 @@ public class Player : MonoBehaviour
     #region player set up in editor
     [Header("Stats")]
     [Header("Health")]
-    public int baseMaxHealth;
+    public int baseMaxHealth = 3;
 
-    public int baseHealth;
+    public int baseHealth = 3;
 
     [Header("Movement")]
-    public float baseMoveSpeed;
+    public float baseMoveSpeed = 20f;
 
     [Range(0, 1)]
-    public int baseCanFly;
+    public int baseCanFly = 0;
 
     [Range(0, 1)]
     public float slowMult = 0.8f;
 
     [Header("Projectiles")]
-    public int baseDamage;
+    public int baseStunAmount = 5;
 
-    public float baseFastestSecondsPerShot;
+    public float baseFastestSecondsPerShot = 0.15f;
 
-    public float baseSecondsPerShot;
+    public float baseSecondsPerShot = 0.75f;
 
-    public float baseProjectileSpeed;
+    public float baseProjectileSpeed = 24f;
 
-    public float baseProjectileRange;
+    public float baseProjectileRange = 1.5f;
 
     public TempProjectile baseProjectile;
 
     [Header("Charged Shot")]
-    public int baseMaxCharges;
+    public int baseMaxCharges = 10;
 
-    public int baseCharges;
+    public int baseCharges = 2;
 
-    public float baseChargeDamageMult;
+    public float baseChargeDamageMult = 1.5f;
 
-    public float baseChargeSplashRadius;
+    public float baseChargeSplashRadius = 15f;
 
-    public float baseFastestChargeTime;
+    public float baseFastestChargeTime = 0.5f;
 
-    public float baseChargeTime;
+    public float baseChargeTime = 2f;
 
     public TempProjectile baseChargedProjectile;
 
@@ -83,7 +81,7 @@ public class Player : MonoBehaviour
     int canFly;
 
     //regular shot
-    int damage;
+    int stunAmount;
 
     float fastestSecondsPerShot;
 
@@ -126,7 +124,7 @@ public class Player : MonoBehaviour
     public int CanFly { get { return canFly; } set { canFly = value; } }
 
     //shooting
-    public int Damage { get { return damage; } set { damage = value; } }
+    public int StunAmount { get { return stunAmount; } set { stunAmount = value; } }
 
     public float FastestSecondsPerShot { get { return fastestSecondsPerShot; } set { fastestSecondsPerShot = value; } }
 
@@ -172,9 +170,9 @@ public class Player : MonoBehaviour
 
     public bool stickAcceleration = true;
     
-    private Rigidbody2D rb2D;
+    protected Rigidbody2D rb2D;
 
-    private Vector2 velocity;
+    protected Vector2 velocity;
 
     //velocity last frame
     private Vector2 lastVelocity;
@@ -205,7 +203,11 @@ public class Player : MonoBehaviour
 
     #region possession
     [Header("Possession")]
-    public float possessionTime;
+    public float possessStrength = 1f;
+
+    public float possessionTime = 10f;
+
+    private int QTEType = 1;
     #endregion possession
 
     #region ivincibility
@@ -230,7 +232,7 @@ public class Player : MonoBehaviour
         canFly = baseCanFly;
 
         //regular shot
-        damage = baseDamage;
+        stunAmount = baseStunAmount;
         fastestSecondsPerShot = baseFastestSecondsPerShot;
         secondsPerShot = baseSecondsPerShot;
 
@@ -312,8 +314,10 @@ public class Player : MonoBehaviour
 
     private void Possess(AI _ai)
     {
-        _ai.gameObject.AddComponent<Possession>();
-        enabled = false;
+        chargedAttackTimer = 0;
+        chargeBar.fillAmount = 0;
+        Possession poss = _ai.gameObject.AddComponent<Possession>();
+        poss.enabled = true;
     }
 
     protected void UpdateMovement()
@@ -387,8 +391,11 @@ public class Player : MonoBehaviour
         }
         #endregion mobile shooting controls
 
+        //I feel like a super genius but this is probably regular code stuff
+        isCharging = (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift));
+
         //Based on inputs shoot a projectile in the intended direction
-        if (isAttacking && attackTimer <= Time.time && (!Input.GetKey(KeyCode.Space) /*|| !isCharging */))
+        if (isAttacking && attackTimer <= Time.time && !!isCharging)
         {
             if (projectile != null)
             {
@@ -396,13 +403,14 @@ public class Player : MonoBehaviour
                 p = Instantiate(projectile, rb2D.position, Quaternion.identity);
                 p.transform.Rotate(new Vector3(0, 0, 1), (180 * Mathf.Atan2(attackDir.y, attackDir.x)) / Mathf.PI - 90);
                 p.speed = projectileSpeed + velocity.magnitude;
-                p.damageAmount = damage;
+                p.damageAmount = stunAmount;
                 p.lifeTime = projectileRange;
+                p.stun = true;
             }
             attackTimer = secondsPerShot + Time.time;
         }
 
-        if ((Input.GetKey(KeyCode.Space) /*||isCharging*/) && charges > 0 && !isCharged)
+        if (isCharging && charges > 0 && !isCharged)
         {
             if (chargedAttackTimer >= chargeTime)
             {
@@ -428,22 +436,22 @@ public class Player : MonoBehaviour
             p = Instantiate(chargedProjectile, rb2D.position, Quaternion.identity);
             p.transform.Rotate(new Vector3(0, 0, 1), (180 * Mathf.Atan2(lastAttackDir.y, lastAttackDir.x)) / Mathf.PI - 90);
             p.speed = projectileSpeed * 1.1f;
-            p.damageAmount = damage;
+            p.damageAmount = stunAmount;
             p.lifeTime = projectileRange;
             chargeBar.color = Color.white;
             isCharged = false;
             chargedAttackTimer = 0;
-            chargeBar.fillAmount = chargedAttackTimer / chargeTime;
+            chargeBar.fillAmount = 0;
             charges--;
         }
-        else if (chargedAttackTimer > 0 && !Input.GetKey(KeyCode.Space))
+        else if (chargedAttackTimer > 0 && !isCharging)
         {
             chargeBar.fillAmount = chargedAttackTimer / chargeTime;
             if (chargeBar.fillAmount == 1) { chargeBar.color = new Color(1, 0, 0.75f); }
             else { chargeBar.color = Color.white; }
             chargedAttackTimer -= Time.deltaTime * 4;
             isCharged = false;
-            if (chargedAttackTimer < 0) chargedAttackTimer = 0;
+            if (chargedAttackTimer < 0) { chargedAttackTimer = 0; chargeBar.fillAmount = 0; }
         }
         wasAttacking = isAttacking;
         lastAttackDir = attackDir;
@@ -484,6 +492,12 @@ public class Player : MonoBehaviour
         rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
     }
 
+    //All things that can get changed in settings should go in here
+    public void UpdateSettings()
+    {
+        QTEType = PlayerPrefs.GetInt("QTE Style");
+    }
+
     private void OnTriggerStay2D(Collider2D c)
     {
         AI ai = c.GetComponent<AI>();
@@ -492,27 +506,29 @@ public class Player : MonoBehaviour
         if (/*ai.isStunned*/true)
         {
             //button mashing
-            if (PlayerPrefs.GetInt("QTE Stlye") == 1)
+            if (QTEType == 1)
             {
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyUp(KeyCode.Space))
                 {
+                    Possess(ai);
                     //if (ai.resistance <= 0) { Possess(ai); }
-                    //else { ai.resistance -= Time.deltaTime; }
+                    //else { ai.resistance -= Time.deltaTime * possessStrength; }
                 }
             }
             //button holding
-            else if (PlayerPrefs.GetInt("QTE Stlye") == 2)
+            else if (QTEType == 2)
             {
                 if (Input.GetKey(KeyCode.Space))
                 {
+                    Possess(ai);
                     //if (ai.resistance <= 0) { Possess(ai); }
-                    //else { ai.resistance -= Time.deltaTime; }
+                    //else { ai.resistance -= Time.deltaTime * possessStrength; }
                 }
             }
             else //no button involvement
             {
                 //if (ai.resistance <= 0) { Possess(ai); }
-                //else { ai.resistance -= Time.deltaTime; }
+                //else { ai.resistance -= Time.deltaTime * possessStrength; }
             }
         }
     }

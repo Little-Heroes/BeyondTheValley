@@ -9,14 +9,37 @@ public class Possession : Player {
 
     float possessionTimer = 0f;
 
-    protected override void Start()
+    protected override void Awake()
     {
+        //storing the player and the possessed ai
         possessed = GetComponent<AI>();
+        possesser = possessed.playerReference.GetComponent<Player>();
+
+        //setting up the possession
+        possessionTimer = Time.time + possesser.possessionTime;
+        rb2D = GetComponent<Rigidbody2D>();
+        velocity = Vector2.zero;
+
+        //setting up variables
         MoveSpeed = possessed.movementSpeed;
         MaxHealth = possessed.maxHealth;
         Health = possessed.maxHealth;
-        possessionTimer = Time.time + possesser.possessionTime;
+
+        //disabling the player
+        possesser.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Collider2D[] cols = possesser.GetComponentsInChildren<Collider2D>();
+        foreach (Collider2D c in cols) { c.enabled = false; }
+        Renderer[] things = possesser.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in things) { r.enabled = false; }
         possesser.enabled = false;
+        
+        //disabling the ai
+        possessed.enabled = false;
+    }
+
+    protected override void Start()
+    {
+
     }
 
     protected override void UpdateAttacking()
@@ -39,7 +62,7 @@ public class Possession : Player {
         //Based on inputs attack in the intended direction
         if (isAttacking && attackTimer <= Time.time && (!Input.GetKey(KeyCode.Space)))
         {
-            //possessed.PlayerBasicAttack(attackDir);
+            possessed.PlayerBasicAttack(attackDir);
         }
 
         else if (Input.GetKey(KeyCode.Space))
@@ -52,26 +75,35 @@ public class Possession : Player {
             {
                 chargedAttackTimer += Time.deltaTime;
             }
-            chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
+            if (chargeBar != null)
+            {
+                chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
 
-            if (chargeBar.fillAmount == 1)
-                chargeBar.color = new Color(1, 0, 0.75f);
-            else
-                chargeBar.color = Color.white;
+                if (chargeBar.fillAmount == 1)
+                    chargeBar.color = new Color(1, 0, 0.75f);
+                else
+                    chargeBar.color = Color.white;
+            }
         }
         else if (isCharged && (releasedKey || (wasAttacking && !isAttacking)))
         {
             //possessed.PlayerChargedAttack(attackDir);
-            chargeBar.color = Color.white;
-            isCharged = false;
-            chargedAttackTimer = 0;
-            chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
+            if (chargeBar != null)
+            {
+                chargeBar.color = Color.white;
+                isCharged = false;
+                chargedAttackTimer = 0;
+                chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
+            }
         }
         else if (chargedAttackTimer > 0 && !Input.GetKey(KeyCode.Space))
         {
-            chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
-            if (chargeBar.fillAmount == 1) { chargeBar.color = new Color(1, 0, 0.75f); }
-            else { chargeBar.color = Color.white; }
+            if (chargeBar != null)
+            {
+                chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
+                if (chargeBar.fillAmount == 1) { chargeBar.color = new Color(1, 0, 0.75f); }
+                else { chargeBar.color = Color.white; }
+            }
             chargedAttackTimer -= Time.deltaTime * 4;
             isCharged = false;
             if (chargedAttackTimer < 0) chargedAttackTimer = 0;
@@ -87,7 +119,7 @@ public class Possession : Player {
             Expunge();
             return;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             StunRing();
             Expunge();
@@ -120,7 +152,24 @@ public class Possession : Player {
     private void Expunge()
     {
         //possessed.animator.SetBool("UnPossess", true);
+        rb2D.velocity = Vector2.zero;
+        possessed.enabled = true;
         possesser.enabled = true;
+        {
+            Collider2D[] cols = possesser.GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D c in cols)
+            {
+                c.enabled = true;
+            }
+        } {
+            Renderer[] things = possesser.GetComponentsInChildren<Renderer>();
+            foreach (Renderer r in things)
+            {
+                r.enabled = true;
+            }
+        }
+        possesser.transform.position = transform.position;
+        possessed.currentHealth = 0;
         Destroy(this);
     }
 }

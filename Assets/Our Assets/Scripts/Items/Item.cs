@@ -32,7 +32,7 @@ public class Item : ScriptableObject {
     //projectile
     [Header("Projectile Changes")]
     [Tooltip("How much does this change the players damage")]
-    public int damageChange;
+    public int stunAmountChange;
 
     [Tooltip("how many seconds between shots will this change the players fire rate by")]
     public float shotDelayChange;
@@ -83,7 +83,7 @@ public class Item : ScriptableObject {
         player.MoveSpeed += speedChange;
         player.CanFly += grantsFlight;
         //projectile changes
-        player.Damage += damageChange;
+        player.StunAmount += stunAmountChange;
         player.FastestSecondsPerShot += maxShotDelayChange;
         player.SecondsPerShot += shotDelayChange;
         player.ProjectileSpeed += projectileSpeedChange;

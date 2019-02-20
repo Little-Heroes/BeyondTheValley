@@ -6,6 +6,7 @@ public class TempProjectile : MonoBehaviour {
 
 	public float speed;
 	public int damageAmount;
+    public bool stun = false;
 
 	public float lifeTime;
 	private float lifeTimeCD; // lifeTime Count Down
