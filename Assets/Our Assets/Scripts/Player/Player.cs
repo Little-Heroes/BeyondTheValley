@@ -266,6 +266,7 @@ public class Player : MonoBehaviour
         #endregion Filling out Items
 
         rb2D = GetComponent<Rigidbody2D>();
+        rb2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
         velocity = Vector2.zero;
     }
 

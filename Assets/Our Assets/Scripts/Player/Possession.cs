@@ -21,13 +21,14 @@ public class Possession : Player
         //setting up the possession
         possessionTimer = Time.time + possesser.possessionTime;
         rb2D = GetComponent<Rigidbody2D>();
+        rb2D.sleepMode = RigidbodySleepMode2D.NeverSleep;
         velocity = Vector2.zero;
-        gameObject.layer = LayerMask.NameToLayer("Player");
 
         //setting up variables
         MoveSpeed = possessed.movementSpeed;
         MaxHealth = possessed.maxHealth;
         Health = possessed.maxHealth;
+        ChargeTime = possessed.abilityOneCooldown;
 
         //disabling the player
         possesser.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -38,13 +39,12 @@ public class Possession : Player
         possesser.enabled = false;
 
         //disabling the ai
+        lifeTime = possessed.resistBar;
         if (lifeTime)
-            lifeTime = possessed.resistBar;
+            lifeTime.fillAmount = 1;
         if (possessed.stunBar)
-        {
             possessed.stunBar.fillAmount = 0;
-
-        }
+        possessed.OnPossession();
         possessed.enabled = false;
     }
 
@@ -86,7 +86,7 @@ public class Possession : Player
             {
                 chargedAttackTimer += Time.deltaTime;
             }
-            if (chargeBar != null)
+            if (chargeBar)
             {
                 chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
 
@@ -99,8 +99,9 @@ public class Possession : Player
         else if (isCharged && (releasedKey || (wasAttacking && !isAttacking)))
         {
             //possessed.PlayerChargedAttack(attackDir);
-            if (chargeBar != null)
+            if (chargeBar)
             {
+                possessed.PlayerAbilityOne(lastAttackDir);
                 chargeBar.color = Color.white;
                 isCharged = false;
                 chargedAttackTimer = 0;
@@ -109,7 +110,7 @@ public class Possession : Player
         }
         else if (chargedAttackTimer > 0 && !Input.GetKey(KeyCode.Space))
         {
-            if (chargeBar != null)
+            if (chargeBar)
             {
                 chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
                 if (chargeBar.fillAmount == 1) { chargeBar.color = new Color(1, 0, 0.75f); }
@@ -139,7 +140,7 @@ public class Possession : Player
         else
         {
             if (lifeTime)
-                lifeTime.fillAmount = (possessionTimer - Time.time) / possessionTime;
+                lifeTime.fillAmount = (possessionTimer - Time.time) / possesser.possessionTime;
         }
         base.Update();
     }
