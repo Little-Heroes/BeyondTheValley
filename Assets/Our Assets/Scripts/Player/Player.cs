@@ -485,20 +485,17 @@ public class Player : MonoBehaviour
     protected virtual void Update()
     {
         if (canMove)
-        {
             UpdateMovement();
-        }
+        else
+            velocity = Vector2.zero;
         UpdateAttacking();
         InvincibilityChecks();
     }
 
     protected virtual void FixedUpdate()
     {
-        if (canMove)
-        {
-            //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
-            rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
-        }
+        //rb2D.MovePosition(rb2D.position + velocity * Time.fixedDeltaTime);
+        rb2D.velocity = velocity * Time.fixedDeltaTime * 100;
     }
     #endregion Update Methods
     //All things that can get changed in settings should go in here
