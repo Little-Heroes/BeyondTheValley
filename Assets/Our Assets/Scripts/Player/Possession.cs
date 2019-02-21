@@ -33,7 +33,7 @@ public class Possession : Player
 
         //disabling the player
         canvas = possesser.GetComponentInChildren<Canvas>().gameObject;
-        canvas.transform.parent = gameObject.transform;
+        canvas.transform.SetParent(gameObject.transform);
         chargeBar = possesser.chargeBar;
         possesser.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Collider2D[] cols = possesser.GetComponentsInChildren<Collider2D>();
@@ -192,7 +192,7 @@ public class Possession : Player
         }
         possesser.transform.position = transform.position;
         possessed.resistance = possessed.maxResistance;
-        canvas.transform.parent = possesser.transform;
+        canvas.transform.SetParent(possesser.transform);
         possessed.Die();
         canMove = true;
         Destroy(this);
