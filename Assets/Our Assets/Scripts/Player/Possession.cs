@@ -9,6 +9,7 @@ public class Possession : Player
     public Player possesser;
     public AI possessed;
     private Image lifeTime;
+    GameObject canvas;
 
     float possessionTimer = 0f;
 
@@ -31,6 +32,9 @@ public class Possession : Player
         ChargeTime = possessed.abilityOneCooldown;
 
         //disabling the player
+        canvas = possesser.GetComponentInChildren<Canvas>().gameObject;
+        canvas.transform.parent = gameObject.transform;
+        chargeBar = possesser.chargeBar;
         possesser.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Collider2D[] cols = possesser.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D c in cols) { c.enabled = false; }
@@ -188,6 +192,7 @@ public class Possession : Player
         }
         possesser.transform.position = transform.position;
         possessed.resistance = possessed.maxResistance;
+        canvas.transform.parent = possesser.transform;
         possessed.Die();
         canMove = true;
         Destroy(this);
