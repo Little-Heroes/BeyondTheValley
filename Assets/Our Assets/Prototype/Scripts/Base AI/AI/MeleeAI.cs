@@ -16,17 +16,16 @@ public class MeleeAI : AI
     public float timeBetweenMovementsTimer;
     public float movementDistance;
     public GameObject meleeGameObject;
-    public LayerMask walls;
 
 
 
     // Update is called once per frame
     protected override void Update()
     {
+        base.Update();
         if (isStunned)
             return;
         Movement();
-        base.Update();
     }
 
     private void OnCollisionStay2D(Collision2D collision)

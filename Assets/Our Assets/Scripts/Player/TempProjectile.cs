@@ -56,12 +56,4 @@ public class TempProjectile : MonoBehaviour {
         if (enemy == null) { return; }
         enemy.TakeDamage(damageAmount, stun);
     }
-
-    private void OnTriggerEnter2D(Collider2D c)
-    {
-        Destroy(gameObject);
-        AI enemy = c.GetComponent<AI>();
-        if (enemy == null) { return; }
-        enemy.TakeDamage(damageAmount, stun);
-    }
 }

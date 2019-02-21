@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TreeBoss : MonoBehaviour
 {
+    [Header("Base abilities")]
+    public float health;
 
     [Header("Rain fire(apples) ability")]
     public GameObject appleBomb;

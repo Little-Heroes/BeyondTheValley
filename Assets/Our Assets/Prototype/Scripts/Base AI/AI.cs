@@ -35,6 +35,7 @@ public class AI : MonoBehaviour
     public Image resistBar;
     public Image stunBar;
     public Collider2D hitbox;
+    public LayerMask walls;
 
     [Header("Attack Variables")]
     public int basicAttackDamage;
@@ -118,7 +119,11 @@ public class AI : MonoBehaviour
         if (stun)
         {
             amountStunned += amount;
-            if(amountStunned >= stunLimit) { isStunned = true; }
+            if(amountStunned >= stunLimit)
+            {
+                isStunned = true;
+                hitbox.isTrigger = true;
+            }
         }
         else { TakeDamage(amount); }
     }
@@ -172,7 +177,8 @@ public class AI : MonoBehaviour
 
     public virtual void OnPossession()
     {
-
+        gameObject.layer = LayerMask.NameToLayer("Player");
+        GetComponent<Collider2D>().isTrigger = false;
     }
 
     public virtual void MoveTowards(Vector2 target, float movementSpeed)

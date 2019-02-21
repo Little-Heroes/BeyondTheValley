@@ -523,6 +523,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114492658636659530, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: baseHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114492658636659530, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10,
+        type: 2}
+      propertyPath: baseMaxHealth
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bb9ed7f5f96e344b8b52f4c327e1e10, type: 2}
   m_IsPrefabAsset: 0
@@ -1555,6 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1295d796eeb8b2479fa64e59a06ac78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   appleBomb: {fileID: 1751497020643394, guid: 5de7ac477a6a267498817d09629e44ff, type: 2}
   appleProjectile: {fileID: 1765984265672316, guid: 1e1c519d4df97054abd585c6110eaa5a,
     type: 2}

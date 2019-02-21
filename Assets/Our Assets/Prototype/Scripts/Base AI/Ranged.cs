@@ -57,7 +57,7 @@ public class Ranged : MonoBehaviour
                 float rotZ = Mathf.Atan2(heading.y, heading.x) * Mathf.Rad2Deg;
                 go.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotZ - 90);
 
-                go.layer = LayerMask.NameToLayer("RangedEnemyProjectile");
+                go.layer = LayerMask.NameToLayer("EnemyProjectile");
                 rangedAttackTimer = rangedAttackCooldown;
             }
         }
