@@ -30,6 +30,7 @@ public class Possession : Player
         MaxHealth = possessed.maxHealth;
         Health = possessed.maxHealth;
         ChargeTime = possessed.abilityOneCooldown;
+        if (ChargeTime == 0) ChargeTime = 1;
 
         //disabling the player
         canvas = possesser.GetComponentInChildren<Canvas>().gameObject;
@@ -122,7 +123,7 @@ public class Possession : Player
             }
             chargedAttackTimer -= Time.deltaTime * 4;
             isCharged = false;
-            if (chargedAttackTimer < 0) chargedAttackTimer = 0;
+            if (chargedAttackTimer < 0) { chargedAttackTimer = 0; chargeBar.fillAmount = 0; }
         }
         wasAttacking = isAttacking;
         lastAttackDir = attackDir;
@@ -193,6 +194,7 @@ public class Possession : Player
         possesser.transform.position = transform.position;
         possessed.resistance = possessed.maxResistance;
         canvas.transform.SetParent(possesser.transform);
+        chargeBar.fillAmount = 0;
         possessed.Die();
         canMove = true;
         Destroy(this);

@@ -52,6 +52,9 @@ public class TempProjectile : MonoBehaviour {
                 collGO.GetComponent<AI>().TakeDamage(damageAmount, stun);
                 break;
         }
+        AI enemy = collGO.GetComponent<AI>();
+        if (enemy == null) { return; }
+        enemy.TakeDamage(damageAmount, stun);
     }
 
     private void OnTriggerEnter2D(Collider2D c)
