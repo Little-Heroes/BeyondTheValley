@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class TempProjectile : MonoBehaviour {
 
+    [HideInInspector]
+    public Vector3 addVel;
 	public float speed;
 	public int damageAmount;
     public bool stun = false;
 
 	public float lifeTime;
 	private float lifeTimeCD; // lifeTime Count Down
+    private Vector3 baseVel;
 
 	void Start(){
 		lifeTimeCD = lifeTime;
+        baseVel = transform.up * speed;
+        transform.up = (baseVel + addVel).normalized;
 	}
 
 	void Update(){
-		transform.position += transform.up * speed * Time.deltaTime;
+        transform.position += (baseVel + addVel) * Time.deltaTime;
 		lifeTimeCD -= Time.deltaTime;
 
 		if (lifeTimeCD <= 0) {

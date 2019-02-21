@@ -406,7 +406,8 @@ public class Player : MonoBehaviour
                 TempProjectile p;
                 p = Instantiate(projectile, rb2D.position, Quaternion.identity);
                 p.transform.Rotate(new Vector3(0, 0, 1), (180 * Mathf.Atan2(attackDir.y, attackDir.x)) / Mathf.PI - 90);
-                p.speed = projectileSpeed + velocity.magnitude;
+                p.speed = projectileSpeed;
+                p.addVel = velocity / 2;
                 p.damageAmount = stunAmount;
                 p.lifeTime = projectileRange;
                 p.stun = true;
@@ -414,6 +415,7 @@ public class Player : MonoBehaviour
             attackTimer = secondsPerShot + Time.time;
         }
 
+        //charged based attacking
         if (isCharging && charges > 0 && !isCharged)
         {
             if (chargedAttackTimer >= chargeTime)
@@ -505,11 +507,8 @@ public class Player : MonoBehaviour
         QTEType = PlayerPrefs.GetInt("QTE Style");
     }
 
-    private void OnTriggerStay2D(Collider2D c)
+    private void lowerResistance(AI ai)
     {
-        AI ai = c.GetComponent<AI>();
-        if (ai == null) { return; }
-
         if (ai.isStunned)
         {
             //button mashing
@@ -536,5 +535,39 @@ public class Player : MonoBehaviour
                 //else { ai.resistance -= Time.deltaTime * possessStrength; }
             }
         }
+    }
+    private void lowerResistance(Boss boss)
+    {
+        if (boss.isStunned)
+        {
+            //button mashing
+            if (QTEType == 1)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    if (boss.resistance > 0) { boss.resistance -= Time.deltaTime * possessStrength; }
+                }
+            }
+            //button holding
+            else if (QTEType == 2)
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    if (boss.resistance > 0) { boss.resistance -= Time.deltaTime * possessStrength; }
+                }
+            }
+            else //no button involvement
+            {
+                if (boss.resistance > 0) { boss.resistance -= Time.deltaTime * possessStrength; }
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D c)
+    {
+        AI ai = c.GetComponent<AI>();
+        Boss boss = c.GetComponent<Boss>();
+        if (ai) { lowerResistance(ai); }
+        else if (boss) { lowerResistance(boss); }
     }
 }
