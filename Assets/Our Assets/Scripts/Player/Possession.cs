@@ -35,6 +35,7 @@ public class Possession : Player
         canvas = possesser.GetComponentInChildren<Canvas>().gameObject;
         canvas.transform.SetParent(gameObject.transform);
         chargeBar = possesser.chargeBar;
+        if (chargeBar) chargeBar.fillAmount = 0;
         possesser.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         Collider2D[] cols = possesser.GetComponentsInChildren<Collider2D>();
         foreach (Collider2D c in cols) { c.enabled = false; }
@@ -62,7 +63,7 @@ public class Possession : Player
         Vector2 attackDir = Vector2.zero;
         bool isAttacking = false;
         bool releasedKey = false;
-
+        bool isCharging = Input.GetKey(KeyCode.Space);
         #region pc attacking inputs
         if (Input.GetKeyUp(KeyCode.UpArrow)) { releasedKey = true; }
         if (Input.GetKeyUp(KeyCode.DownArrow)) { releasedKey = true; }
@@ -75,12 +76,12 @@ public class Possession : Player
         if (Input.GetKey(KeyCode.LeftArrow)) { attackDir.x -= 1; isAttacking = true; releasedKey = false; }
         #endregion pc attacking inputs
         //Based on inputs attack in the intended direction
-        if (isAttacking && attackTimer <= Time.time && (!Input.GetKey(KeyCode.Space)))
+        if (isAttacking && attackTimer <= Time.time && !isCharging)
         {
             possessed.PlayerBasicAttack(attackDir);
         }
 
-        else if (Input.GetKey(KeyCode.Space))
+        else if (isCharging && !isCharged)
         {
             if (chargedAttackTimer >= ChargeTime)
             {
@@ -102,17 +103,16 @@ public class Possession : Player
         }
         else if (isCharged && (releasedKey || (wasAttacking && !isAttacking)))
         {
-            //possessed.PlayerChargedAttack(attackDir);
+            possessed.PlayerAbilityOne(lastAttackDir);
             if (chargeBar)
             {
-                possessed.PlayerAbilityOne(lastAttackDir);
                 chargeBar.color = Color.white;
                 isCharged = false;
                 chargedAttackTimer = 0;
                 chargeBar.fillAmount = chargedAttackTimer / ChargeTime;
             }
         }
-        else if (chargedAttackTimer > 0 && !Input.GetKey(KeyCode.Space))
+        else if (chargedAttackTimer > 0 && !isCharging)
         {
             if (chargeBar)
             {
