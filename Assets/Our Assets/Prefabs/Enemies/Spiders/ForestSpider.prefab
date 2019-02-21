@@ -11,6 +11,24 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1894380693957928}
   m_IsPrefabAsset: 1
+--- !u!1 &1036802487506320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224505860825690846}
+  - component: {fileID: 223677206629687556}
+  - component: {fileID: 114849020404332674}
+  - component: {fileID: 114921310304039540}
+  m_Layer: 10
+  m_Name: AI canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1121249811546910
 GameObject:
   m_ObjectHideFlags: 1
@@ -19,7 +37,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4041798017787722}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: MidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -34,10 +52,27 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4856381607062620}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: LowerLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1236138552904880
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224043167936102634}
+  - component: {fileID: 222911567674464212}
+  - component: {fileID: 114135220317759206}
+  m_Layer: 10
+  m_Name: StunBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -50,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4647520032819388}
   - component: {fileID: 212319074878558984}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_LowerLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4421416203657272}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4773663912854708}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: UpperLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -96,8 +131,25 @@ GameObject:
   m_Component:
   - component: {fileID: 4341712165527586}
   - component: {fileID: 212977866126957408}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_LowerLeg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1475502466517438
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224131444521953116}
+  - component: {fileID: 222038547195868310}
+  - component: {fileID: 114550206919272476}
+  m_Layer: 10
+  m_Name: ResistanceBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4382969997781494}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: UpperLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -126,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4654595447466318}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: LowerLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -142,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4147399245849622}
   - component: {fileID: 212596851346127038}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4928673636819974}
   - component: {fileID: 212043309585011622}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4875459602735548}
   - component: {fileID: 212777315166324876}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_MidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4495385810042204}
   - component: {fileID: 212721884022598804}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_UpperLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4813869183476774}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: MidLeg_Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
@@ -222,9 +274,9 @@ GameObject:
   - component: {fileID: 4094386290057982}
   - component: {fileID: 50045053054915864}
   - component: {fileID: 58811425659328816}
-  - component: {fileID: 114473779471639514}
   - component: {fileID: 95734220839900980}
-  m_Layer: 15
+  - component: {fileID: 114602285842686748}
+  m_Layer: 10
   m_Name: ForestSpider
   m_TagString: FreeRoam
   m_Icon: {fileID: 0}
@@ -239,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4649676363633164}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: RightLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4745864974164222}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: LeftLegs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4045008430113726}
   - component: {fileID: 212414280329034570}
-  m_Layer: 15
+  m_Layer: 10
   m_Name: ForestSpider_MidLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,10 +363,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894380693957928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.81, y: 7.65, z: 0}
+  m_LocalPosition: {x: -10.7, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4421416203657272}
+  - {fileID: 224505860825690846}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -521,19 +574,19 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1894380693957928}
-  m_BodyType: 2
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58811425659328816
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -567,7 +620,61 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114473779471639514
+--- !u!114 &114135220317759206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236138552904880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.8772963, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114550206919272476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475502466517438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &114602285842686748
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -575,15 +682,87 @@ MonoBehaviour:
   m_GameObject: {fileID: 1894380693957928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db18f376de4af4b4ea994ae52761401d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ea87d1f6edf758499bbac87494bbb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  timeBetweenMovements: 0.5
-  moveDistance: 7
-  moveSpeed: 0.15
-  followSpeed: 8
+  AItype: 
+  bonusPossessionTime: 0
+  maxHealth: 0
+  currentHealth: 0
+  movementSpeed: 20
+  isAwake: 0
+  playerReference: {fileID: 0}
+  rb2D: {fileID: 0}
+  startingTeam: 0
+  currentTeam: 0
+  possessed: 0
+  isStunned: 0
+  maxResistance: 2
+  stunLimit: 10
+  resistance: 2
+  amountStunned: 0
+  resistBar: {fileID: 114550206919272476}
+  stunBar: {fileID: 114135220317759206}
+  hitbox: {fileID: 0}
+  walls:
+    serializedVersion: 2
+    m_Bits: 32768
+  basicAttackDamage: 1
+  basicAttackCooldown: 0.5
+  basicAttackTimer: 0
+  contactDamage: 0
+  abilityOneDamage: 0
+  abilityOneCooldown: 0
+  abilityOneTimer: 0
+  gizmoPoint: {x: 0, y: 0, z: 0}
+  isMovingRandomly: 1
+  isCharging: 0
+  targetPosition: {x: 0, y: 0, z: 0}
   distanceNear: 15
+  velocity: {x: 0, y: 0, z: 0}
+  previousRand: {x: 0, y: 0, z: 0}
+  timeBetweenMovements: 0.5
+  timeBetweenMovementsTimer: 0.5
+  movementDistance: 7
+  meleeGameObject: {fileID: 1642226284167898, guid: b171e42586d2a1b469256be24dc2f509,
+    type: 2}
+--- !u!114 &114849020404332674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036802487506320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!114 &114921310304039540
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036802487506320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!212 &212043309585011622
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -906,3 +1085,93 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!222 &222038547195868310
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475502466517438}
+  m_CullTransparentMesh: 0
+--- !u!222 &222911567674464212
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236138552904880}
+  m_CullTransparentMesh: 0
+--- !u!223 &223677206629687556
+Canvas:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036802487506320}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &224043167936102634
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236138552904880}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6750761, y: 0.47793, z: 0.47793}
+  m_Children: []
+  m_Father: {fileID: 224505860825690846}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1.89}
+  m_SizeDelta: {x: 6.806, y: 0.48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224131444521953116
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475502466517438}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4125, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224505860825690846}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00000085682, y: 3.789}
+  m_SizeDelta: {x: 6.806, y: 0.48}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224505860825690846
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036802487506320}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1.4125, z: 1}
+  m_Children:
+  - {fileID: 224131444521953116}
+  - {fileID: 224043167936102634}
+  m_Father: {fileID: 4094386290057982}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.2, y: -0}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}

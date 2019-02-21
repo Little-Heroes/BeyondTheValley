@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeBoss : MonoBehaviour
+public class TreeBoss : Boss
 {
-    [Header("Base abilities")]
-    public float health;
-
     [Header("Rain fire(apples) ability")]
     public GameObject appleBomb;
     public GameObject appleProjectile;
@@ -34,15 +31,21 @@ public class TreeBoss : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         player = GameObject.FindGameObjectWithTag("Player");
         bombDropTimer = bombDropCooldown;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
+        if (isStunned)
+            return;
+
         if (shotCooldownTimer > 0)
         {
             shotCooldownTimer -= Time.deltaTime;

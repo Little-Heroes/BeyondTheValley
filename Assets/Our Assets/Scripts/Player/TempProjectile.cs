@@ -56,6 +56,9 @@ public class TempProjectile : MonoBehaviour {
             case "AI":
                 collGO.GetComponent<AI>().TakeDamage(damageAmount, stun);
                 break;
+            case "Boss":
+                collGO.GetComponent<Boss>().TakeDamage(damageAmount, stun);
+                break;
         }
         AI enemy = collGO.GetComponent<AI>();
         if (enemy == null) { return; }

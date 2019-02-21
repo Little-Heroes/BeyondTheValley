@@ -16,6 +16,7 @@ TagManager:
   - TreeBoundsUp
   - TreeBoundsDown
   - Orc
+  - Boss
   layers:
   - Default
   - TransparentFX
