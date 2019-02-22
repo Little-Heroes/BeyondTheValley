@@ -85,6 +85,7 @@ public class AI : MonoBehaviour
             if (amountStunned <= 0)
             {
                 isStunned = false;
+                hitbox.isTrigger = false;
             }
         }
         //if the resistance is less than the max, increase it back to the max
@@ -123,6 +124,7 @@ public class AI : MonoBehaviour
             {
                 isStunned = true;
                 hitbox.isTrigger = true;
+                rb2D.velocity = Vector3.zero;
             }
         }
         else { TakeDamage(amount); }

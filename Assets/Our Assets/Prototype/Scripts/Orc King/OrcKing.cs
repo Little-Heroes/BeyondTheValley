@@ -3,24 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrcKing : MonoBehaviour
+public class OrcKing : Boss
 {
     public float startingHealth;
     private float health;
     public Text healthText;
     private int currentPhase = 1;
     private GameObject player;
-
-    [Header("Orc Spawning")]
-    public GameObject[] minions;
-    public GameObject orc;
-    public Transform[] orcSpawns;
-    [SerializeField]
-    [Tooltip("Percent Chance")]
-    private float chanceOfSpawningOrc;
-    [SerializeField]
-    private float orcSpawnCooldown;
-    float orcSpawnTimer;
+    
     [Tooltip("How much you want the spawn time to decrease by")]
     public float orcSpawnCDDecrease;
 
@@ -57,7 +47,7 @@ public class OrcKing : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
         ChangeColour();
         smashTimer = smashCooldown;
@@ -67,8 +57,13 @@ public class OrcKing : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
+        if (isStunned)
+            return;
+
         #region BossPhases
         if (health < startingHealth * 0.75f && currentPhase == 1)
         {
@@ -91,7 +86,7 @@ public class OrcKing : MonoBehaviour
             rotationSpeed *= -1;
             rotationSpeed += rotationSpeedIncrease;
             projectileSpeed += projectileSpeedIncrease;
-            orcSpawnCooldown -= orcSpawnCDDecrease;
+            spawnMinionCD -= orcSpawnCDDecrease;
             currentPhase++;
             changeColourCooldown -= colourChangeCDDecrease;
         }
@@ -109,37 +104,37 @@ public class OrcKing : MonoBehaviour
 
         healthText.text = health.ToString();
 
-        if (orcSpawnTimer > 0)
-        {
-            orcSpawnTimer -= Time.deltaTime;
-        }
-        else
-        {
-            //pick a random number from 1 to 100
-            int rng = Random.Range(0, 101);
-            //if the random number is less than the chance percentage of spawning an orc
-            if (rng < chanceOfSpawningOrc)
-            {
-                //spawn an orc in one of the orc spawn points
-                bool wantToSpawn = false;
-                int randomSpawn = 0;
-                while (!wantToSpawn)
-                {
-                    randomSpawn = Random.Range(0, orcSpawns.Length);
-                    if (Vector2.Distance(orcSpawns[randomSpawn].transform.position, player.transform.position) <= 25.0f)
-                    {
-                        continue;
-                    }
-                    else
-                        wantToSpawn = true;
-                }
-                rng = Random.Range(0, minions.Length);
-                if (minions[rng])
-                    Instantiate(minions[rng], orcSpawns[randomSpawn].transform.position, Quaternion.identity);
-            }
-            //reset orc spawn timer
-            orcSpawnTimer = orcSpawnCooldown;
-        }
+        //if (spawnMinionTimer > 0)
+        //{
+        //    spawnMinionTimer -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    //pick a random number from 1 to 100
+        //    int rng = Random.Range(0, 101);
+        //    //if the random number is less than the chance percentage of spawning an orc
+        //    if (rng < chanceOfSpawningEnemy)
+        //    {
+        //        //spawn an orc in one of the orc spawn points
+        //        bool wantToSpawn = false;
+        //        int randomSpawn = 0;
+        //        while (!wantToSpawn)
+        //        {
+        //            randomSpawn = Random.Range(0, minionsToSpawn.Length);
+        //            if (Vector2.Distance(minionsToSpawn[randomSpawn].transform.position, player.transform.position) <= 25.0f)
+        //            {
+        //                continue;
+        //            }
+        //            else
+        //                wantToSpawn = true;
+        //        }
+        //        rng = Random.Range(0, minionsToSpawn.Length);
+        //        if (minions[rng])
+        //            Instantiate(minionsToSpawn[rng], orcSpawns[randomSpawn].transform.position, Quaternion.identity);
+        //    }
+        //    //reset orc spawn timer
+        //    orcSpawnTimer = orcSpawnCooldown;
+        //}
         if (changeColourTimer > 0)
         {
             changeColourTimer -= Time.deltaTime;

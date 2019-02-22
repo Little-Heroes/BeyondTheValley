@@ -64,53 +64,7 @@ public class DashAI : AI
 
     public override void PlayerBasicAttack(Vector3 direction)
     {
-        //if (basicAttackTimer > 0)
-        //{
-        //    basicAttackTimer -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    if (isCharging)
-        //    {
-        //        //todo: disable player movement
-        //        gameObject.GetComponent<Possession>().canMove = false;
-
-        //        float distanceTravelled = Vector3.Distance(beginPos, rb2D.position);
-        //        float startToEnd = Vector3.Distance(beginPos, dashPoint);
-        //        float distance = distanceTravelled / startToEnd;
-        //        dashSpeed = animCurve.Evaluate(distance) * maxDashSpeed;
-        //        Debug.Log(distance);
-        //        MoveTowards(dashPoint, dashSpeed);
-
-        //        if (Vector3.Distance(rb2D.position, dashPoint) < 1.0f)
-        //        {
-        //            //todo: re-enable player movement
-        //            gameObject.GetComponent<Possession>().canMove = true;
-        //            isCharging = false;
-        //            basicAttackTimer = basicAttackCooldown;
-        //            dashSpeed = 0.0f;
-        //        }
-        //        if (previousPos == rb2D.position)
-        //        {
-        //            //todo: re-enable player movement
-        //            gameObject.GetComponent<Possession>().canMove = true;
-        //            isCharging = false;
-        //            basicAttackTimer = basicAttackCooldown;
-        //            dashSpeed = 0.0f;
-        //        }
-        //        previousPos = rb2D.position;
-        //    }
-        //    else
-        //    {
-        //        beginPos = rb2D.position;
-        //        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDashAmount, walls);
-        //        if (hit.collider != null)
-        //            dashPoint = rb2D.position + (Vector2)direction * (hit.distance - hitbox.bounds.extents.x / 2);
-        //        else
-        //            dashPoint = rb2D.position + (Vector2)direction * playerDashAmount;
-        //        isCharging = true;
-        //    }
-        //}
+       
     }
 
     public void Dashing(Vector3 direction)
@@ -149,7 +103,7 @@ public class DashAI : AI
         else
         {
             beginPos = rb2D.position;
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDashAmount, walls);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, playerDashAmount);
             if (hit.collider != null)
                 dashPoint = rb2D.position + (Vector2)direction * (hit.distance - hitbox.bounds.extents.x / 2);
             else

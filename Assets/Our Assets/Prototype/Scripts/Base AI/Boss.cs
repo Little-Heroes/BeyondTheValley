@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
+    public enum SpawnType
+    {
+        InBounds,
+        SpawnPoints
+    }
 
     [Header("Boss Health Variables")]
     public int maxHealth;
@@ -23,7 +28,21 @@ public class Boss : MonoBehaviour
     public Image resistBar;
     public Image stunBar;
     public int stunDamage;
+    public bool canBeStunned = true;
+    public float stunCooldown;
+    public float stunCooldownTimer;
 
+    [Header("Spawn Minions")]
+    public GameObject[] minionsToSpawn;
+    public GameObject[] spawnPoints;
+    public Collider2D spawnBounds;
+    public SpawnType spawnType;
+    public float spawnMinionCD;
+    public float spawnMinionTimer;
+    [Range(0, 100)]
+    public float chanceOfSpawningEnemy;
+    bool canSpawnHere = false;
+    int index = 0;
 
 
     // Use this for initialization
@@ -37,7 +56,8 @@ public class Boss : MonoBehaviour
     {
         ManageStun();
         ActuallyTakeDamage();
-        
+        SpawnEnemies();
+
         healthBar.fillAmount = (float)currentHealth / (float)maxHealth;
     }
 
@@ -50,7 +70,7 @@ public class Boss : MonoBehaviour
     {
 
     }
-    
+
     public virtual void AbilityTwo()
     {
 
@@ -58,8 +78,9 @@ public class Boss : MonoBehaviour
 
     public virtual void ActuallyTakeDamage()
     {
-        if(resistance <= 0)
+        if (resistance <= 0)
         {
+            canBeStunned = false;
             TakeDamage(stunDamage, false);
             isStunned = false;
             resistance = maxResistance;
@@ -70,6 +91,15 @@ public class Boss : MonoBehaviour
 
     public virtual void ManageStun()
     {
+        if(!canBeStunned)
+        {
+            stunCooldownTimer -= Time.deltaTime;
+            if(stunCooldownTimer <= 0)
+            {
+                stunCooldownTimer = stunCooldown;
+                canBeStunned = true;
+            }
+        }
         if (stunBar != null)
         {
             if (amountStunned <= 0) { stunBar.fillAmount = 0; }
@@ -109,7 +139,7 @@ public class Boss : MonoBehaviour
 
     public virtual void TakeDamage(int amount, bool stun)
     {
-        if (stun)
+        if (stun && canBeStunned)
         {
             amountStunned += amount;
             if (amountStunned >= stunLimit)
@@ -118,7 +148,7 @@ public class Boss : MonoBehaviour
                 OnStun();
             }
         }
-        else
+        else if(!stun)
         {
             currentHealth -= amount;
             if (currentHealth <= 0)
@@ -141,5 +171,56 @@ public class Boss : MonoBehaviour
     public virtual void OnExitStun()
     {
         GetComponent<Collider2D>().isTrigger = false;
+    }
+
+    public virtual void SpawnEnemies()
+    {
+        if (isStunned)
+            return;
+        if (spawnMinionTimer > 0)
+        {
+            spawnMinionTimer -= Time.deltaTime;
+        }
+        else
+        {
+            int rng = Random.Range(0, 101);
+            if (rng < chanceOfSpawningEnemy)
+            {
+                switch (spawnType)
+                {
+                    case SpawnType.InBounds:
+                        Vector3 randomPosition = new Vector3();
+                        while (!canSpawnHere)
+                        {
+                            randomPosition = new Vector3(Random.Range(spawnBounds.bounds.min.x, spawnBounds.bounds.max.x), Random.Range(spawnBounds.bounds.min.y, spawnBounds.bounds.max.y), 0);
+
+                            if(index > 100)
+                            {
+
+                            }
+
+                            Collider2D hit = Physics2D.OverlapCircle(randomPosition, spawnBounds.bounds.size.magnitude);
+                            if (hit.gameObject.tag == "Boss")
+                            {
+                                
+                            }
+                            else
+                            {
+                                canSpawnHere = true;
+                            }
+                            index++;
+                        }
+
+                        int randomMinion = Random.Range(0, minionsToSpawn.Length);
+                        Instantiate(minionsToSpawn[randomMinion], randomPosition, Quaternion.identity);
+
+                        break;
+                    case SpawnType.SpawnPoints:
+
+                        break;
+                }
+            }
+            spawnMinionTimer = spawnMinionCD;
+        }
     }
 }

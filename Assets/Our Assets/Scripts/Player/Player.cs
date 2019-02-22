@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("GIVE")]
     public Animator anim;
+    public Image lifeBar;
     
     #region stats
     //-----------------------
@@ -220,6 +221,8 @@ public class Player : MonoBehaviour
     public float timeBetweenBlinks;
     float blinkTimer = 0.0f;
     #endregion invincibility
+
+
     protected virtual void Awake()
     {
         #region applying stats 
@@ -489,6 +492,7 @@ public class Player : MonoBehaviour
 
     protected virtual void Update()
     {
+        lifeBar.fillAmount = (float)health / (float)maxHealth;
         if (canMove)
             UpdateMovement();
         else

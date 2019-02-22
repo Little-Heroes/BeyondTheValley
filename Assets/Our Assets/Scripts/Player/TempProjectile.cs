@@ -64,4 +64,18 @@ public class TempProjectile : MonoBehaviour {
         if (enemy == null) { return; }
         enemy.TakeDamage(damageAmount, stun);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        switch (collision.tag)
+        {
+            case "Boss":
+                collision.gameObject.GetComponent<Boss>().TakeDamage(damageAmount, stun);
+                Destroy(gameObject);
+                break;
+            case "Enemy":
+                Destroy(gameObject);
+                break;
+        }
+    }
 }

@@ -9,6 +9,7 @@ public class RangedAI : AI {
     public float minimumRangeDistance;
     public bool inRange;
     public float imTooCloseDistance;
+    public int damage;
     
 	
 	// Update is called once per frame
@@ -16,7 +17,10 @@ public class RangedAI : AI {
     {
         base.Update();
         if (isStunned)
+        {
+            Debug.Log(rb2D.velocity);
             return;
+        }
         Movement();
     }
 
@@ -53,6 +57,8 @@ public class RangedAI : AI {
             GameObject go = Instantiate(projectile, transform.position, Quaternion.identity);
             float rotZ = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             go.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotZ - 90);
+            go.GetComponent<TempProjectile>().damageAmount = basicAttackDamage;
+            
 
             go.layer = LayerMask.NameToLayer("PlayerProjectile");
             basicAttackTimer = basicAttackCooldown;

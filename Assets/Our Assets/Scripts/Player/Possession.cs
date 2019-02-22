@@ -52,6 +52,7 @@ public class Possession : Player
             possessed.stunBar.fillAmount = 0;
         possessed.OnPossession();
         possessed.enabled = false;
+        lifeBar = possesser.lifeBar;
     }
 
     protected override void Start()
