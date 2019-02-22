@@ -273,6 +273,7 @@ public class Player : MonoBehaviour
     protected virtual void Start()
     {
         //get things in the scene
+        #region mobile control initialisation
         VariableJoystick[] variableJoysticks = FindObjectsOfType<VariableJoystick>();
         for (int i = 0; i < variableJoysticks.Length; i++)
         {        
@@ -281,6 +282,7 @@ public class Player : MonoBehaviour
             if (variableJoysticks[i].CompareTag("ShootStick"))
                 shootingControl = variableJoysticks[i];
         }
+        #endregion mobile control initialisation
     }
 
     #region damage handling
